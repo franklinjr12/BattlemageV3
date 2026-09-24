@@ -1,0 +1,29 @@
+{
+  "Emberweaver": {
+    "description": "Burn, detonate, and escape. Aggressive spell combinations.",
+    "spells": [
+      "fireball",
+      "combustion",
+      "frost_nova",
+      "wind_dash"
+    ]
+  },
+  "Winter Warden": {
+    "description": "Freeze, shatter, and endure. Deliberate control and heavy impacts.",
+    "spells": [
+      "ice_spike",
+      "frost_nova",
+      "earth_pillar",
+      "stone_guard"
+    ]
+  },
+  "Stormcaller": {
+    "description": "Group, scorch, and displace. Fast attacks and battlefield control.",
+    "spells": [
+      "wind_blade",
+      "vortex",
+      "burning_ground",
+      "gust"
+    ]
+  }
+}

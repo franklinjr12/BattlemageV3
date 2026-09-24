@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/spells/area.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/frost_nova.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "frost_nova"
+display_name = "Frost Nova"
+element = "Ice"
+targeting = "self_area"
+description = "Freeze enemies around you. Heavy Earth attacks can Shatter them."
+price = 70
+damage = 22
+cooldown = 7
+reach = 0
+radius = 110
+status = "freeze"
+status_duration = 1.6
+spell_scene = ExtResource("2")
+icon = ExtResource("3")

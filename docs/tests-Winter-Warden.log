@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CONTENT_SAMPLE tags=["enemy_only"] enemies=["hound", "hound", "spitter"] attacks=["fireball", "flame_lash", "burning_ground", "combustion"] waves=2
+AUTOPLAY package=Winter Warden difficulty=1
+AUTOPLAY stage=1 victory=true time=45.1s hp=150 effects=1
+AUTOPLAY stage=2 victory=true time=85.9s hp=158 effects=3
+AUTOPLAY stage=3 victory=true time=119.5s hp=166 effects=0
+AUTOPLAY stage=4 victory=true time=74.7s hp=149 effects=3
+AUTOPLAY stage=5 victory=false time=127.3s hp=0 effects=3
+AUTOPLAY completed=4/5 simulated_combat=452.6s
+FAIL: Full run completes using real combat and legal upgrades: Winter Warden
+RESULT: 157 checks / 1 failures
+  Full run completes using real combat and legal upgrades: Winter Warden

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/silk_robe.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "silk_robe"
+display_name = "Cloudsilk Robe"
+slot = "Robe"
+price = 85
+modifiers = {"speed": 0.1, "cast_speed": 0.2}
+description = "Movement +10%; cast times -20%."
+tags = PackedStringArray("Air")
+icon = ExtResource("3")

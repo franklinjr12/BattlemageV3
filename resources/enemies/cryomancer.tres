@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "cryomancer"
+display_name = "Iris · Winter Adept"
+max_health = 1230.0
+speed = 100
+profile = "mage"
+attacks = PackedStringArray("ice_spike", "frost_nova", "icicle_rain", "ice_barrier")
+preferred_range = 265
+visual = "mage"
+color = Color(0.5137254901960784, 0.8352941176470589, 0.9607843137254902, 1)
+gold = 60
+xp = 85
+stagger_resistance = 3
+power = -0.3
+aggression = 1
+dodge_interval = 9
+scene = ExtResource("2")

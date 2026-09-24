@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/fault_staff.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "fault_staff"
+display_name = "Faultline Staff"
+slot = "Staff"
+price = 85
+modifiers = {"earth_damage": 0.2, "stagger_power": 1}
+description = "Earth damage +20%; +1 Stagger buildup."
+tags = PackedStringArray("Earth")
+icon = ExtResource("3")

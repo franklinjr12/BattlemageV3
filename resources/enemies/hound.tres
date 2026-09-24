@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "hound"
+display_name = "Ash Hound"
+max_health = 190.0
+speed = 110
+profile = "melee"
+attacks = PackedStringArray("claw")
+preferred_range = 54
+visual = "hound"
+color = Color(0.7490196078431373, 0.5215686274509804, 0.43137254901960786, 1)
+gold = 15
+xp = 20
+stagger_resistance = 3
+power = 0
+aggression = 1
+dodge_interval = 9
+scene = ExtResource("2")

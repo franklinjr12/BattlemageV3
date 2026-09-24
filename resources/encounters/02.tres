@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/encounter_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "02"
+display_name = "The First Duel"
+description = "A rival mage enters. Bait their casts, then punish the recovery."
+kind = "mage"
+enemies = PackedStringArray("pyromancer")
+variants = PackedStringArray("cryomancer")
+base_difficulty = 1.0
+boss = false
+formation = "duel"
+progression_required = 1
+
+waves = 1

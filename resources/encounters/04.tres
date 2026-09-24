@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EncounterData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/encounter_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "04"
+display_name = "Fourfold Trial"
+description = "Orin combines schools. Escape the Vortex before the heavy blow."
+kind = "mage"
+enemies = PackedStringArray("battlemage")
+variants = PackedStringArray()
+base_difficulty = 1.12
+boss = false
+formation = "duel"
+progression_required = 3
+
+waves = 1

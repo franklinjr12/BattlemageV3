@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/coal_ring.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "coal_ring"
+display_name = "Coalheart"
+slot = "Ring"
+price = 75
+modifiers = {"burn_duration": 0.5, "fire_damage": 0.08}
+description = "Burn duration +50%; Fire damage +8%."
+tags = PackedStringArray("Fire")
+icon = ExtResource("3")

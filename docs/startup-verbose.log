@@ -1,0 +1,202 @@
+WorkerThreadPool: 4 threads, 1 max low-priority.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+Using "default" pen tablet driver...
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+CORE API HASH: 2004498165
+EDITOR API HASH: 1696660745
+SceneTreeFTI: traversal method DEFAULT
+Loading resource: res://scripts/data/content.gd remapped: res://scripts/data/content.gd
+Completed load for: 'res://scripts/data/content.gd' remapped 'res://scripts/data/content.gd' at thread -1
+Loading resource: res://scripts/progression/game_state.gd remapped: res://scripts/progression/game_state.gd
+Completed load for: 'res://scripts/progression/game_state.gd' remapped 'res://scripts/progression/game_state.gd' at thread -1
+Loading resource: res://scripts/audio/sound.gd remapped: res://scripts/audio/sound.gd
+Completed load for: 'res://scripts/audio/sound.gd' remapped 'res://scripts/audio/sound.gd' at thread -1
+Loaded system CA certificates
+Loading resource: res://scenes/main.tscn remapped: res://scenes/main.tscn
+Loading resource: res://scripts/ui/main.gd remapped: res://scripts/ui/main.gd
+Completed load for: 'res://scripts/ui/main.gd' remapped 'res://scripts/ui/main.gd' at thread -1
+Completed load for: 'res://scenes/main.tscn' remapped 'res://scenes/main.tscn' at thread -1
+Loading resource: res://resources/spells/burning_ground.tres remapped: res://resources/spells/burning_ground.tres
+Loading resource: res://scenes/spells/area.tscn remapped: res://scenes/spells/area.tscn
+Completed load for: 'res://scenes/spells/area.tscn' remapped 'res://scenes/spells/area.tscn' at thread -1
+Loading resource: res://art/fire.svg remapped: res://art/fire.svg
+Loading resource: res://.godot/imported/fire.svg-048ec096cdbbf9cca9cdf4dfb53b7d0b.ctex remapped: res://.godot/imported/fire.svg-048ec096cdbbf9cca9cdf4dfb53b7d0b.ctex
+Completed load for: 'res://art/fire.svg' remapped 'res://art/fire.svg' at thread -1
+Completed load for: 'res://resources/spells/burning_ground.tres' remapped 'res://resources/spells/burning_ground.tres' at thread -1
+Loading resource: res://resources/spells/claw.tres remapped: res://resources/spells/claw.tres
+Loading resource: res://art/earth.svg remapped: res://art/earth.svg
+Loading resource: res://.godot/imported/earth.svg-4a33416e3923d678f54131d7de6ce547.ctex remapped: res://.godot/imported/earth.svg-4a33416e3923d678f54131d7de6ce547.ctex
+Completed load for: 'res://art/earth.svg' remapped 'res://art/earth.svg' at thread -1
+Completed load for: 'res://resources/spells/claw.tres' remapped 'res://resources/spells/claw.tres' at thread -1
+Loading resource: res://resources/spells/combustion.tres remapped: res://resources/spells/combustion.tres
+Completed load for: 'res://resources/spells/combustion.tres' remapped 'res://resources/spells/combustion.tres' at thread -1
+Loading resource: res://resources/spells/earth_pillar.tres remapped: res://resources/spells/earth_pillar.tres
+Completed load for: 'res://resources/spells/earth_pillar.tres' remapped 'res://resources/spells/earth_pillar.tres' at thread -1
+Loading resource: res://resources/spells/fireball.tres remapped: res://resources/spells/fireball.tres
+Loading resource: res://scenes/spells/projectile.tscn remapped: res://scenes/spells/projectile.tscn
+Loading resource: res://scripts/combat/projectile.gd remapped: res://scripts/combat/projectile.gd
+Completed load for: 'res://scripts/combat/projectile.gd' remapped 'res://scripts/combat/projectile.gd' at thread -1
+Completed load for: 'res://scenes/spells/projectile.tscn' remapped 'res://scenes/spells/projectile.tscn' at thread -1
+Completed load for: 'res://resources/spells/fireball.tres' remapped 'res://resources/spells/fireball.tres' at thread -1
+Loading resource: res://resources/spells/flame_lash.tres remapped: res://resources/spells/flame_lash.tres
+Completed load for: 'res://resources/spells/flame_lash.tres' remapped 'res://resources/spells/flame_lash.tres' at thread -1
+Loading resource: res://resources/spells/frost_nova.tres remapped: res://resources/spells/frost_nova.tres
+Loading resource: res://art/ice.svg remapped: res://art/ice.svg
+Loading resource: res://.godot/imported/ice.svg-d7907fe33ad5df174f529796f80ff2e6.ctex remapped: res://.godot/imported/ice.svg-d7907fe33ad5df174f529796f80ff2e6.ctex
+Completed load for: 'res://art/ice.svg' remapped 'res://art/ice.svg' at thread -1
+Completed load for: 'res://resources/spells/frost_nova.tres' remapped 'res://resources/spells/frost_nova.tres' at thread -1
+Loading resource: res://resources/spells/gust.tres remapped: res://resources/spells/gust.tres
+Loading resource: res://art/air.svg remapped: res://art/air.svg
+Loading resource: res://.godot/imported/air.svg-b8a554177d6841c628da9b634d08e936.ctex remapped: res://.godot/imported/air.svg-b8a554177d6841c628da9b634d08e936.ctex
+Completed load for: 'res://art/air.svg' remapped 'res://art/air.svg' at thread -1
+Completed load for: 'res://resources/spells/gust.tres' remapped 'res://resources/spells/gust.tres' at thread -1
+Loading resource: res://resources/spells/hex.tres remapped: res://resources/spells/hex.tres
+Completed load for: 'res://resources/spells/hex.tres' remapped 'res://resources/spells/hex.tres' at thread -1
+Loading resource: res://resources/spells/ice_barrier.tres remapped: res://resources/spells/ice_barrier.tres
+Completed load for: 'res://resources/spells/ice_barrier.tres' remapped 'res://resources/spells/ice_barrier.tres' at thread -1
+Loading resource: res://resources/spells/ice_spike.tres remapped: res://resources/spells/ice_spike.tres
+Completed load for: 'res://resources/spells/ice_spike.tres' remapped 'res://resources/spells/ice_spike.tres' at thread -1
+Loading resource: res://resources/spells/icicle_rain.tres remapped: res://resources/spells/icicle_rain.tres
+Completed load for: 'res://resources/spells/icicle_rain.tres' remapped 'res://resources/spells/icicle_rain.tres' at thread -1
+Loading resource: res://resources/spells/pounce.tres remapped: res://resources/spells/pounce.tres
+Completed load for: 'res://resources/spells/pounce.tres' remapped 'res://resources/spells/pounce.tres' at thread -1
+Loading resource: res://resources/spells/slam.tres remapped: res://resources/spells/slam.tres
+Completed load for: 'res://resources/spells/slam.tres' remapped 'res://resources/spells/slam.tres' at thread -1
+Loading resource: res://resources/spells/spit.tres remapped: res://resources/spells/spit.tres
+Completed load for: 'res://resources/spells/spit.tres' remapped 'res://resources/spells/spit.tres' at thread -1
+Loading resource: res://resources/spells/stone_fist.tres remapped: res://resources/spells/stone_fist.tres
+Completed load for: 'res://resources/spells/stone_fist.tres' remapped 'res://resources/spells/stone_fist.tres' at thread -1
+Loading resource: res://resources/spells/stone_guard.tres remapped: res://resources/spells/stone_guard.tres
+Completed load for: 'res://resources/spells/stone_guard.tres' remapped 'res://resources/spells/stone_guard.tres' at thread -1
+Loading resource: res://resources/spells/tremor.tres remapped: res://resources/spells/tremor.tres
+Completed load for: 'res://resources/spells/tremor.tres' remapped 'res://resources/spells/tremor.tres' at thread -1
+Loading resource: res://resources/spells/vortex.tres remapped: res://resources/spells/vortex.tres
+Completed load for: 'res://resources/spells/vortex.tres' remapped 'res://resources/spells/vortex.tres' at thread -1
+Loading resource: res://resources/spells/wind_blade.tres remapped: res://resources/spells/wind_blade.tres
+Completed load for: 'res://resources/spells/wind_blade.tres' remapped 'res://resources/spells/wind_blade.tres' at thread -1
+Loading resource: res://resources/spells/wind_dash.tres remapped: res://resources/spells/wind_dash.tres
+Completed load for: 'res://resources/spells/wind_dash.tres' remapped 'res://resources/spells/wind_dash.tres' at thread -1
+Loading resource: res://resources/gear/cinder_boots.tres remapped: res://resources/gear/cinder_boots.tres
+Completed load for: 'res://resources/gear/cinder_boots.tres' remapped 'res://resources/gear/cinder_boots.tres' at thread -1
+Loading resource: res://resources/gear/cinder_staff.tres remapped: res://resources/gear/cinder_staff.tres
+Completed load for: 'res://resources/gear/cinder_staff.tres' remapped 'res://resources/gear/cinder_staff.tres' at thread -1
+Loading resource: res://resources/gear/coal_ring.tres remapped: res://resources/gear/coal_ring.tres
+Completed load for: 'res://resources/gear/coal_ring.tres' remapped 'res://resources/gear/coal_ring.tres' at thread -1
+Loading resource: res://resources/gear/ember_robe.tres remapped: res://resources/gear/ember_robe.tres
+Completed load for: 'res://resources/gear/ember_robe.tres' remapped 'res://resources/gear/ember_robe.tres' at thread -1
+Loading resource: res://resources/gear/fault_staff.tres remapped: res://resources/gear/fault_staff.tres
+Completed load for: 'res://resources/gear/fault_staff.tres' remapped 'res://resources/gear/fault_staff.tres' at thread -1
+Loading resource: res://resources/gear/frost_boots.tres remapped: res://resources/gear/frost_boots.tres
+Completed load for: 'res://resources/gear/frost_boots.tres' remapped 'res://resources/gear/frost_boots.tres' at thread -1
+Loading resource: res://resources/gear/glacier_robe.tres remapped: res://resources/gear/glacier_robe.tres
+Completed load for: 'res://resources/gear/glacier_robe.tres' remapped 'res://resources/gear/glacier_robe.tres' at thread -1
+Loading resource: res://resources/gear/granite_robe.tres remapped: res://resources/gear/granite_robe.tres
+Completed load for: 'res://resources/gear/granite_robe.tres' remapped 'res://resources/gear/granite_robe.tres' at thread -1
+Loading resource: res://resources/gear/horizon_ring.tres remapped: res://resources/gear/horizon_ring.tres
+Completed load for: 'res://resources/gear/horizon_ring.tres' remapped 'res://resources/gear/horizon_ring.tres' at thread -1
+Loading resource: res://resources/gear/pilgrim_boots.tres remapped: res://resources/gear/pilgrim_boots.tres
+Completed load for: 'res://resources/gear/pilgrim_boots.tres' remapped 'res://resources/gear/pilgrim_boots.tres' at thread -1
+Loading resource: res://resources/gear/prism_staff.tres remapped: res://resources/gear/prism_staff.tres
+Completed load for: 'res://resources/gear/prism_staff.tres' remapped 'res://resources/gear/prism_staff.tres' at thread -1
+Loading resource: res://resources/gear/quake_ring.tres remapped: res://resources/gear/quake_ring.tres
+Completed load for: 'res://resources/gear/quake_ring.tres' remapped 'res://resources/gear/quake_ring.tres' at thread -1
+Loading resource: res://resources/gear/rime_ring.tres remapped: res://resources/gear/rime_ring.tres
+Completed load for: 'res://resources/gear/rime_ring.tres' remapped 'res://resources/gear/rime_ring.tres' at thread -1
+Loading resource: res://resources/gear/scholar_robe.tres remapped: res://resources/gear/scholar_robe.tres
+Completed load for: 'res://resources/gear/scholar_robe.tres' remapped 'res://resources/gear/scholar_robe.tres' at thread -1
+Loading resource: res://resources/gear/silk_robe.tres remapped: res://resources/gear/silk_robe.tres
+Completed load for: 'res://resources/gear/silk_robe.tres' remapped 'res://resources/gear/silk_robe.tres' at thread -1
+Loading resource: res://resources/gear/stone_boots.tres remapped: res://resources/gear/stone_boots.tres
+Completed load for: 'res://resources/gear/stone_boots.tres' remapped 'res://resources/gear/stone_boots.tres' at thread -1
+Loading resource: res://resources/gear/tempo_ring.tres remapped: res://resources/gear/tempo_ring.tres
+Completed load for: 'res://resources/gear/tempo_ring.tres' remapped 'res://resources/gear/tempo_ring.tres' at thread -1
+Loading resource: res://resources/gear/wind_boots.tres remapped: res://resources/gear/wind_boots.tres
+Completed load for: 'res://resources/gear/wind_boots.tres' remapped 'res://resources/gear/wind_boots.tres' at thread -1
+Loading resource: res://resources/gear/winter_staff.tres remapped: res://resources/gear/winter_staff.tres
+Completed load for: 'res://resources/gear/winter_staff.tres' remapped 'res://resources/gear/winter_staff.tres' at thread -1
+Loading resource: res://resources/gear/zephyr_staff.tres remapped: res://resources/gear/zephyr_staff.tres
+Completed load for: 'res://resources/gear/zephyr_staff.tres' remapped 'res://resources/gear/zephyr_staff.tres' at thread -1
+Loading resource: res://resources/enemies/battlemage.tres remapped: res://resources/enemies/battlemage.tres
+Loading resource: res://scenes/enemies/enemy.tscn remapped: res://scenes/enemies/enemy.tscn
+Completed load for: 'res://scenes/enemies/enemy.tscn' remapped 'res://scenes/enemies/enemy.tscn' at thread -1
+Completed load for: 'res://resources/enemies/battlemage.tres' remapped 'res://resources/enemies/battlemage.tres' at thread -1
+Loading resource: res://resources/enemies/champion.tres remapped: res://resources/enemies/champion.tres
+Completed load for: 'res://resources/enemies/champion.tres' remapped 'res://resources/enemies/champion.tres' at thread -1
+Loading resource: res://resources/enemies/cryomancer.tres remapped: res://resources/enemies/cryomancer.tres
+Completed load for: 'res://resources/enemies/cryomancer.tres' remapped 'res://resources/enemies/cryomancer.tres' at thread -1
+Loading resource: res://resources/enemies/golem.tres remapped: res://resources/enemies/golem.tres
+Completed load for: 'res://resources/enemies/golem.tres' remapped 'res://resources/enemies/golem.tres' at thread -1
+Loading resource: res://resources/enemies/hound.tres remapped: res://resources/enemies/hound.tres
+Completed load for: 'res://resources/enemies/hound.tres' remapped 'res://resources/enemies/hound.tres' at thread -1
+Loading resource: res://resources/enemies/pyromancer.tres remapped: res://resources/enemies/pyromancer.tres
+Completed load for: 'res://resources/enemies/pyromancer.tres' remapped 'res://resources/enemies/pyromancer.tres' at thread -1
+Loading resource: res://resources/enemies/skitter.tres remapped: res://resources/enemies/skitter.tres
+Completed load for: 'res://resources/enemies/skitter.tres' remapped 'res://resources/enemies/skitter.tres' at thread -1
+Loading resource: res://resources/enemies/spitter.tres remapped: res://resources/enemies/spitter.tres
+Completed load for: 'res://resources/enemies/spitter.tres' remapped 'res://resources/enemies/spitter.tres' at thread -1
+Loading resource: res://resources/enemies/wisp.tres remapped: res://resources/enemies/wisp.tres
+Completed load for: 'res://resources/enemies/wisp.tres' remapped 'res://resources/enemies/wisp.tres' at thread -1
+Loading resource: res://resources/encounters/01.tres remapped: res://resources/encounters/01.tres
+Completed load for: 'res://resources/encounters/01.tres' remapped 'res://resources/encounters/01.tres' at thread -1
+Loading resource: res://resources/encounters/02.tres remapped: res://resources/encounters/02.tres
+Completed load for: 'res://resources/encounters/02.tres' remapped 'res://resources/encounters/02.tres' at thread -1
+Loading resource: res://resources/encounters/03.tres remapped: res://resources/encounters/03.tres
+Completed load for: 'res://resources/encounters/03.tres' remapped 'res://resources/encounters/03.tres' at thread -1
+Loading resource: res://resources/encounters/04.tres remapped: res://resources/encounters/04.tres
+Completed load for: 'res://resources/encounters/04.tres' remapped 'res://resources/encounters/04.tres' at thread -1
+Loading resource: res://resources/encounters/05.tres remapped: res://resources/encounters/05.tres
+Completed load for: 'res://resources/encounters/05.tres' remapped 'res://resources/encounters/05.tres' at thread -1
+Loading resource: res://audio/fire.wav remapped: res://audio/fire.wav
+Loading resource: res://.godot/imported/fire.wav-6ae4976c6e588f9a6e4e721bfc0007fc.sample remapped: res://.godot/imported/fire.wav-6ae4976c6e588f9a6e4e721bfc0007fc.sample
+Completed load for: 'res://audio/fire.wav' remapped 'res://audio/fire.wav' at thread -1
+Loading resource: res://audio/ice.wav remapped: res://audio/ice.wav
+Loading resource: res://.godot/imported/ice.wav-d0f31c3fe515090c4e19d1a35821cf6b.sample remapped: res://.godot/imported/ice.wav-d0f31c3fe515090c4e19d1a35821cf6b.sample
+Completed load for: 'res://audio/ice.wav' remapped 'res://audio/ice.wav' at thread -1
+Loading resource: res://audio/earth.wav remapped: res://audio/earth.wav
+Loading resource: res://.godot/imported/earth.wav-7918b62a5ac7175f05ff4282d02f569c.sample remapped: res://.godot/imported/earth.wav-7918b62a5ac7175f05ff4282d02f569c.sample
+Completed load for: 'res://audio/earth.wav' remapped 'res://audio/earth.wav' at thread -1
+Loading resource: res://audio/air.wav remapped: res://audio/air.wav
+Loading resource: res://.godot/imported/air.wav-269825562a9c76038c5403b0f4fbf19d.sample remapped: res://.godot/imported/air.wav-269825562a9c76038c5403b0f4fbf19d.sample
+Completed load for: 'res://audio/air.wav' remapped 'res://audio/air.wav' at thread -1
+Loading resource: res://audio/hit.wav remapped: res://audio/hit.wav
+Loading resource: res://.godot/imported/hit.wav-0ce77c86b567f5096583f88ec20be939.sample remapped: res://.godot/imported/hit.wav-0ce77c86b567f5096583f88ec20be939.sample
+Completed load for: 'res://audio/hit.wav' remapped 'res://audio/hit.wav' at thread -1
+Loading resource: res://audio/dodge.wav remapped: res://audio/dodge.wav
+Loading resource: res://.godot/imported/dodge.wav-53c4de3ffb2201089993163706fbf8e6.sample remapped: res://.godot/imported/dodge.wav-53c4de3ffb2201089993163706fbf8e6.sample
+Completed load for: 'res://audio/dodge.wav' remapped 'res://audio/dodge.wav' at thread -1
+Loading resource: res://audio/ui.wav remapped: res://audio/ui.wav
+Loading resource: res://.godot/imported/ui.wav-06bfb1e55dc9304a461a90837821f11d.sample remapped: res://.godot/imported/ui.wav-06bfb1e55dc9304a461a90837821f11d.sample
+Completed load for: 'res://audio/ui.wav' remapped 'res://audio/ui.wav' at thread -1
+Loading resource: res://audio/death.wav remapped: res://audio/death.wav
+Loading resource: res://.godot/imported/death.wav-081f95a37f237b6f3ceb7246d5521f75.sample remapped: res://.godot/imported/death.wav-081f95a37f237b6f3ceb7246d5521f75.sample
+Completed load for: 'res://audio/death.wav' remapped 'res://audio/death.wav' at thread -1
+Loading resource: res://audio/victory.wav remapped: res://audio/victory.wav
+Loading resource: res://.godot/imported/victory.wav-da420982e37bfc82d9712a3c0c9ca4aa.sample remapped: res://.godot/imported/victory.wav-da420982e37bfc82d9712a3c0c9ca4aa.sample
+Completed load for: 'res://audio/victory.wav' remapped 'res://audio/victory.wav' at thread -1
+Loading resource: res://audio/defeat.wav remapped: res://audio/defeat.wav
+Loading resource: res://.godot/imported/defeat.wav-fe08c8a15ef35f9003e30f6d7aa18117.sample remapped: res://.godot/imported/defeat.wav-fe08c8a15ef35f9003e30f6d7aa18117.sample
+Completed load for: 'res://audio/defeat.wav' remapped 'res://audio/defeat.wav' at thread -1
+Loading resource: res://audio/boss.wav remapped: res://audio/boss.wav
+Loading resource: res://.godot/imported/boss.wav-b5dd6587749e8f4df17428abb5b1c8fe.sample remapped: res://.godot/imported/boss.wav-b5dd6587749e8f4df17428abb5b1c8fe.sample
+Completed load for: 'res://audio/boss.wav' remapped 'res://audio/boss.wav' at thread -1
+Loading resource: res://audio/ambience.wav remapped: res://audio/ambience.wav
+Loading resource: res://.godot/imported/ambience.wav-4e48c496bc19d49d0c92570e564b0fe0.sample remapped: res://.godot/imported/ambience.wav-4e48c496bc19d49d0c92570e564b0fe0.sample
+Completed load for: 'res://audio/ambience.wav' remapped 'res://audio/ambience.wav' at thread -1
+Loading resource: res://scripts/ui/backdrop.gd remapped: res://scripts/ui/backdrop.gd
+Completed load for: 'res://scripts/ui/backdrop.gd' remapped 'res://scripts/ui/backdrop.gd' at thread -1
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+Leaked instance: AudioStreamPlaybackWAV:9223372103762314826 - Reference count: 1
+Leaked instance: AudioStreamWAV:9223372103711983180 - Reference count: 1
+Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
+Resource still in use: res://audio/ambience.wav (AudioStreamWAV)
+Orphan StringName: Music (static: 0, total: 2)
+StringName: 1 unclaimed string names at exit.
+WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit.
+   at: clear (core/io/resource.cpp:817)

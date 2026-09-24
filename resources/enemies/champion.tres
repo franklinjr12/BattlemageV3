@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "champion"
+display_name = "AUREL · THE UNBROKEN"
+max_health = 3325.0
+speed = 125
+profile = "mage"
+attacks = PackedStringArray("vortex", "icicle_rain", "earth_pillar", "fireball")
+preferred_range = 210
+visual = "champion"
+color = Color(0.9098039215686274, 0.796078431372549, 0.5098039215686274, 1)
+gold = 120
+xp = 150
+stagger_resistance = 5
+power = -0.3
+aggression = 1.2
+dodge_interval = 6
+scene = ExtResource("2")

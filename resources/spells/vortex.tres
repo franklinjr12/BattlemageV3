@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/spells/area.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/vortex.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "vortex"
+display_name = "Vortex"
+element = "Air"
+targeting = "ground"
+description = "Draw enemies together for 3.5 seconds. Follow with an area spell."
+price = 100
+damage = 7
+cooldown = 10
+cast_time = 0.3
+reach = 300
+radius = 100
+duration = 3.5
+tick_interval = 0.5
+tags = PackedStringArray("pull")
+spell_scene = ExtResource("2")
+icon = ExtResource("3")

@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CONTENT_SAMPLE tags=["enemy_only"] enemies=["hound", "hound", "spitter"] attacks=["fireball", "flame_lash", "burning_ground", "combustion"] waves=2
+AUTOPLAY package=Stormcaller difficulty=1
+AUTOPLAY stage=1 victory=true time=34.4s hp=150 effects=2
+AUTOPLAY stage=2 victory=true time=53.7s hp=158 effects=1
+AUTOPLAY stage=3 victory=true time=70.3s hp=166 effects=2
+AUTOPLAY stage=4 victory=true time=67.6s hp=140 effects=1
+AUTOPLAY stage=5 victory=true time=96.9s hp=0 effects=1
+AUTOPLAY completed=5/5 simulated_combat=322.8s
+RESULT: 157 checks / 0 failures

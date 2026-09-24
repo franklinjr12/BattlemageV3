@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/ember_robe.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "ember_robe"
+display_name = "Ember Mantle"
+slot = "Robe"
+price = 70
+modifiers = {"max_hp": 20, "burn_duration": 0.25}
+description = "+20 health; Burn duration +25%."
+tags = PackedStringArray("Fire")
+icon = ExtResource("3")

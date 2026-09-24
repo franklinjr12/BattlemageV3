@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/cinder_staff.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "cinder_staff"
+display_name = "Cinder Staff"
+slot = "Staff"
+price = 85
+modifiers = {"fire_damage": 0.23, "burn_duration": 0.35}
+description = "Fire damage +23%; Burn duration +35%."
+tags = PackedStringArray("Fire")
+icon = ExtResource("3")

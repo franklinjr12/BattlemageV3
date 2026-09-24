@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/spells/projectile.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/ice_spike.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "ice_spike"
+display_name = "Ice Spike"
+element = "Ice"
+targeting = "projectile"
+description = "A piercing shard. Three Chill stacks Freeze a target."
+price = 60
+damage = 24
+cooldown = 2.6
+reach = 380
+projectile_speed = 480
+status = "chill"
+tags = PackedStringArray("pierce")
+spell_scene = ExtResource("2")
+icon = ExtResource("3")

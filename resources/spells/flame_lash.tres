@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/spells/area.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/flame_lash.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "flame_lash"
+display_name = "Flame Lash"
+element = "Fire"
+targeting = "cone"
+description = "Sweep nearby enemies with flame. Applies Burn."
+price = 70
+damage = 37
+cooldown = 4.8
+reach = 150
+cone_angle = 75
+status = "burn"
+knockback = 35
+spell_scene = ExtResource("2")
+icon = ExtResource("3")

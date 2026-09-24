@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/spells/area.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/gust.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "gust"
+display_name = "Gust"
+element = "Air"
+targeting = "cone"
+description = "Launch and push enemies. Drive them into persistent damage zones."
+price = 70
+damage = 18
+cooldown = 4
+reach = 190
+cone_angle = 80
+knockback = 150
+status = "airborne"
+status_duration = 0.4
+spell_scene = ExtResource("2")
+icon = ExtResource("3")

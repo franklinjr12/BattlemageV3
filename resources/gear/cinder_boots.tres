@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/cinder_boots.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "cinder_boots"
+display_name = "Ashwalkers"
+slot = "Boots"
+price = 65
+modifiers = {"speed": 0.08, "fire_damage": 0.1}
+description = "Movement +8%; Fire damage +10%."
+tags = PackedStringArray("Fire")
+icon = ExtResource("3")

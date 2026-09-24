@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/glacier_robe.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "glacier_robe"
+display_name = "Glacier Robe"
+slot = "Robe"
+price = 80
+modifiers = {"max_hp": 30, "barrier": 0.4}
+description = "+30 health; barriers +40%."
+tags = PackedStringArray("Ice")
+icon = ExtResource("3")

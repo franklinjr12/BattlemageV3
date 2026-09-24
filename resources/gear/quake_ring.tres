@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/quake_ring.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "quake_ring"
+display_name = "Quake Seal"
+slot = "Ring"
+price = 80
+modifiers = {"area": 0.2, "earth_damage": 0.08}
+description = "Spell area +20%; Earth damage +8%."
+tags = PackedStringArray("Earth")
+icon = ExtResource("3")

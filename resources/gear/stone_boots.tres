@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/stone_boots.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "stone_boots"
+display_name = "Anchor Boots"
+slot = "Boots"
+price = 65
+modifiers = {"max_hp": 20, "stagger_power": 1}
+description = "+20 health; +1 Stagger buildup."
+tags = PackedStringArray("Earth")
+icon = ExtResource("3")

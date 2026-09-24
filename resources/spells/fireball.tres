@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
+[ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/spells/projectile.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/fireball.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "fireball"
+display_name = "Fireball"
+element = "Fire"
+targeting = "projectile"
+description = "A burning bolt that bursts on impact. Applies Burn."
+price = 60
+damage = 30
+cooldown = 2.8
+reach = 360
+radius = 36
+status = "burn"
+tags = PackedStringArray("explode")
+spell_scene = ExtResource("2")
+icon = ExtResource("3")

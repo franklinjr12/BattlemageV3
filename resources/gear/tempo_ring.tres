@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/tempo_ring.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "tempo_ring"
+display_name = "Tempo Loop"
+slot = "Ring"
+price = 100
+modifiers = {"cooldown": 0.12}
+description = "All spell cooldowns -12%."
+tags = PackedStringArray("Air")
+icon = ExtResource("3")

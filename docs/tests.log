@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+AUTOPLAY stage=1 victory=true time=50.1s hp=140 effects=1
+AUTOPLAY stage=2 victory=true time=61.7s hp=133 effects=1
+AUTOPLAY stage=3 victory=true time=112.6s hp=158 effects=2
+AUTOPLAY stage=4 victory=true time=65.6s hp=151 effects=2
+AUTOPLAY stage=5 victory=true time=133.1s hp=124 effects=2
+AUTOPLAY completed=5/5 simulated_combat=423.1s
+RESULT: 150 checks / 0 failures

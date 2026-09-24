@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CONTENT_SAMPLE tags=["enemy_only"] enemies=["hound", "hound", "spitter"] attacks=["fireball", "flame_lash", "burning_ground", "combustion"] waves=2
+AUTOPLAY package=Emberweaver difficulty=1
+AUTOPLAY stage=1 victory=true time=45.7s hp=150.0 effects=2
+AUTOPLAY stage=2 victory=true time=47.4s hp=158.0 effects=1
+AUTOPLAY stage=3 victory=true time=110.3s hp=153.0 effects=1
+AUTOPLAY stage=4 victory=true time=89.1s hp=81.6 effects=2
+AUTOPLAY stage=5 victory=true time=131.8s hp=95.6 effects=4
+AUTOPLAY completed=5/5 simulated_combat=424.4s
+RESULT: 158 checks / 0 failures

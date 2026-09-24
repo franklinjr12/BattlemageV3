@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "wisp"
+display_name = "Hollow Oracle"
+max_health = 180.0
+speed = 80
+profile = "support"
+attacks = PackedStringArray("hex")
+preferred_range = 250
+visual = "wisp"
+color = Color(0.6431372549019608, 0.7725490196078432, 0.7254901960784313, 1)
+gold = 25
+xp = 28
+stagger_resistance = 3
+power = 0
+aggression = 1
+dodge_interval = 9
+scene = ExtResource("2")

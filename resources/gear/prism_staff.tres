@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GearData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/gear_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/prism_staff.svg" id="3"]
+[resource]
+script = ExtResource("1")
+id = "prism_staff"
+display_name = "Prism Staff"
+slot = "Staff"
+price = 110
+modifiers = {"power": 0.15}
+description = "All spell damage +15%."
+tags = PackedStringArray("Air")
+icon = ExtResource("3")

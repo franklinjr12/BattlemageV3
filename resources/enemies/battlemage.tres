@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="2"]
+[resource]
+script = ExtResource("1")
+id = "battlemage"
+display_name = "Orin · Fourfold Duelist"
+max_health = 1605.0
+speed = 115
+profile = "mage"
+attacks = PackedStringArray("vortex", "earth_pillar", "wind_blade", "stone_guard")
+preferred_range = 185
+visual = "mage"
+color = Color(0.615686274509804, 0.8901960784313725, 0.7725490196078432, 1)
+gold = 80
+xp = 110
+stagger_resistance = 3
+power = -0.3
+aggression = 1
+dodge_interval = 9
+scene = ExtResource("2")

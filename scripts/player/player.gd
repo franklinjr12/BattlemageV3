@@ -8,6 +8,8 @@ var tutorial_done: bool = false
 func setup(owner_arena: Node2D) -> void:
 	arena = owner_arena
 	team = 0
+	visual = "player"
+	refresh_visual()
 	modifiers = GameState.stats()
 	move_speed = float(Content.economy.player_speed) * (1.0 + float(modifiers.get("speed", 0.0)))
 	health.reset(float(modifiers.max_hp))

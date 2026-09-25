@@ -148,6 +148,9 @@ func float_text(point: Vector2, text: String, color: Color) -> void:
 
 func burst(point: Vector2, color: Color, radius: float) -> void:
 	bursts.append({"point": point, "color": color, "radius": radius, "life": 0.3})
+	var impact := ImpactBurst.new()
+	effects.add_child(impact)
+	impact.configure(point, color, radius)
 
 func _draw() -> void:
 	ArenaArt.draw_arena(self, CENTER, RADIUS, elapsed)

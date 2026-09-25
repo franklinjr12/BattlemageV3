@@ -29,10 +29,14 @@ var visual: String = "mage"
 var tint: Color = Color("83d5f5")
 var display_name: String = "Battlemage"
 var elapsed: float = 0.0
+var fighter_sprite: FighterSprite
 
 func _ready() -> void:
 	health.died.connect(_on_death)
 	destination = position
+	fighter_sprite = FighterSprite.new()
+	add_child(fighter_sprite)
+	refresh_visual()
 
 func _physics_process(delta: float) -> void:
 	if arena == null or not arena.active or health.dead:
@@ -71,6 +75,7 @@ func _physics_process(delta: float) -> void:
 		if moving:
 			facing = (destination - position).normalized()
 			position = arena.clamp_position(position.move_toward(destination, move_speed * statuses.movement_factor() * delta), body_radius)
+	update_visual_state()
 	queue_redraw()
 
 func think(_delta: float) -> void:
@@ -166,8 +171,12 @@ func receive_damage(event: DamageEvent) -> float:
 		if statuses.rooted():
 			cancel_cast()
 		position = arena.clamp_position(position + event.knockback, body_radius)
+	var impact_ready := flash <= 0.0
 	flash = 0.12
 	if dealt > 0:
+		if impact_ready:
+			var impact_color: Color = Content.colors.get(event.element, tint)
+			arena.burst(position + Vector2(0, -8), impact_color, 18.0 if event.tags.has("heavy") else 12.0)
 		arena.float_text(position + Vector2(0, -22), str(ceili(dealt)), Color("ff9482") if team == 0 else Color("f7e6bd"))
 		Sound.cue("hit", -14.0)
 		if event.tags.has("heavy"):
@@ -179,94 +188,63 @@ func _on_death() -> void:
 	moving = false
 	statuses.clear()
 	Sound.cue("death", -8.0)
+	if arena != null:
+		arena.burst(position + Vector2(0, -8), tint, maxf(24.0, body_radius * 1.7))
+	update_visual_state()
 	died.emit(self)
 	queue_redraw()
 
-func _draw() -> void:
-	if health.dead:
-		draw_circle(Vector2.ZERO, body_radius, Color("2e3339"))
-		draw_line(Vector2(-8, -4), Vector2(8, 4), Color("798085"), 3)
+func refresh_visual() -> void:
+	if fighter_sprite == null:
 		return
-	var color: Color = Color.WHITE if flash > 0.0 else tint
-	if statuses.active.has("freeze"):
-		color = Color("c9efff")
-	var bob: float = roundf(sin(elapsed * (12 if moving else 3)) * (2 if moving else 1))
-	var offset: Vector2 = Vector2(0, bob)
-	draw_set_transform(offset)
+	var key: String = "player" if team == 0 else visual
+	fighter_sprite.setup(key)
+
+func update_visual_state() -> void:
+	if fighter_sprite == null:
+		return
+	var key: String = "player" if team == 0 else visual
+	if fighter_sprite.visual_key != key:
+		fighter_sprite.setup(key)
+	var state: StringName = &"idle"
+	if health.dead:
+		state = &"death"
+	elif flash > 0.0:
+		state = &"hurt"
+	elif casting != null:
+		state = &"cast"
+	elif moving or dodge_time > 0.0:
+		state = &"move"
+	fighter_sprite.set_state(state, facing, statuses.active.has("freeze"), flash > 0.0)
+
+func _draw() -> void:
 	draw_ellipse_shadow()
 	if dodge_time > 0.0:
 		for index: int in 3:
-			draw_rect(Rect2(-dodge_direction * float(index * 9) + Vector2(-8, -15), Vector2(16, 24)), Color(color, 0.13))
-	if visual in ["mage", "champion"]:
-		pixel(Vector2(-9, -11), Vector2(18, 22), color.darkened(0.4))
-		pixel(Vector2(-12, 3), Vector2(24, 9), color.darkened(0.18))
-		pixel(Vector2(-7, -20), Vector2(14, 13), Color("e5bea0"))
-		pixel(Vector2(-10, -23), Vector2(20, 7), color)
-		pixel(Vector2(-7, -29), Vector2(14, 8), color)
-		pixel(Vector2(-4, -34), Vector2(8, 7), color)
-		pixel(Vector2(-5, -15), Vector2(10, 3), Color("263148"))
-		pixel(Vector2(facing.x * 3, -14), Vector2(3, 2), Color("fff3d6"))
-		pixel(Vector2(-8, 12), Vector2(6, 4), Color("2a2832"))
-		pixel(Vector2(3, 12), Vector2(6, 4), Color("2a2832"))
-		var hand: float = 15.0 if facing.x >= 0 else -18.0
-		pixel(Vector2(hand, -18), Vector2(3, 31), Color("9c8056"))
-		pixel(Vector2(hand - 3, -24), Vector2(9, 8), color.lightened(0.4))
-		if visual == "champion":
-			pixel(Vector2(-12, -25), Vector2(24, 4), Color("f3d581"))
-			for x: int in [-10, -2, 6]:
-				pixel(Vector2(x, -30), Vector2(4, 5), Color("f3d581"))
-	elif visual == "golem":
-		pixel(Vector2(-18, -22), Vector2(36, 34), color.darkened(0.2))
-		pixel(Vector2(-13, -31), Vector2(26, 15), color)
-		pixel(Vector2(-25, -10), Vector2(10, 23), color)
-		pixel(Vector2(15, -10), Vector2(10, 23), color)
-		pixel(Vector2(-9, -25), Vector2(5, 3), Color("ffd585"))
-		pixel(Vector2(4, -25), Vector2(5, 3), Color("ffd585"))
-		pixel(Vector2(-3, -15), Vector2(6, 17), color.lightened(0.5))
-	elif visual == "spitter":
-		pixel(Vector2(-16, -17), Vector2(31, 27), color.darkened(0.2))
-		pixel(Vector2(-12, -23), Vector2(22, 14), color)
-		pixel(Vector2(-18, 7), Vector2(10, 7), color)
-		pixel(Vector2(7, 7), Vector2(10, 7), color)
-		pixel(Vector2(facing.x * 12 - 7, -12), Vector2(15, 13), Color("293b38"))
-		pixel(Vector2(facing.x * 13 - 4, -8), Vector2(8, 6), Color("c4df91"))
-		pixel(Vector2(-7, -20), Vector2(4, 3), Color("fff0b9"))
-		pixel(Vector2(5, -20), Vector2(4, 3), Color("fff0b9"))
-	elif visual == "wisp":
-		pixel(Vector2(-12, -19), Vector2(24, 22), color.darkened(0.2))
-		pixel(Vector2(-8, -27), Vector2(16, 13), color)
-		pixel(Vector2(-4, -22), Vector2(8, 5), Color("fcebc4"))
-		pixel(Vector2(-7, 3), Vector2(5, 9), color)
-		pixel(Vector2(3, 3), Vector2(5, 13), color)
-	else:
-		pixel(Vector2(-14, -13), Vector2(28, 21), color.darkened(0.15))
-		pixel(Vector2(facing.x * 9 - 7, -20), Vector2(14, 13), color)
-		pixel(Vector2(-13, -22), Vector2(5, 10), color)
-		pixel(Vector2(8, -22), Vector2(5, 10), color)
-		for x: int in [-13, 7]:
-			pixel(Vector2(x, 7), Vector2(6, 7), color)
-		pixel(Vector2(facing.x * 9 - 3, -16), Vector2(6, 3), Color("fff0b9"))
-		if visual == "skitter":
-			for y: int in [-10, 0, 10]:
-				pixel(Vector2(-22, y), Vector2(8, 3), color)
-				pixel(Vector2(14, y), Vector2(8, 3), color)
+			var back := -dodge_direction * float(9 + index * 9)
+			draw_line(back + Vector2(-7, -18), back + Vector2(7, -18), Color(tint, 0.2 - index * 0.045), 3.0)
 	if barrier > 0.0 or guard_time > 0.0:
-		draw_arc(Vector2(0, -8), 29, 0, TAU, 24, Color("aadff2") if barrier > 0 else Color("d4ba7a"), 2)
+		var shield_color := Color("aadff2") if barrier > 0.0 else Color("d4ba7a")
+		draw_circle(Vector2(0, -9), 27, Color(shield_color, 0.08))
+		draw_arc(Vector2(0, -9), 28, -PI * 0.2 + elapsed, PI * 1.55 + elapsed, 30, Color(shield_color, 0.78), 2.0)
+		draw_arc(Vector2(0, -9), 24, PI + elapsed * 0.7, TAU + elapsed * 0.7, 22, Color(shield_color, 0.35), 1.0)
 	if statuses.active.has("burn"):
-		for x: int in [-10, 0, 10]:
-			pixel(Vector2(x, -36 - int(elapsed * 8 + x) % 5), Vector2(4, 9), Color("f59a63"))
+		for index: int in 5:
+			var phase := elapsed * 8.0 + index * 1.7
+			var point := Vector2(-12 + index * 6, -31 - fmod(phase * 3.0, 9.0))
+			draw_circle(point, 2.5, Color("f59a63"))
+			draw_circle(point + Vector2(0, -3), 1.5, Color("ffd06a"))
 	if statuses.active.has("chill") or statuses.rooted():
-		draw_arc(Vector2.ZERO, 22, 0, TAU, 8, Color("b4e8ff"), 2)
+		draw_arc(Vector2(0, -5), 23, 0, TAU, 12, Color("b4e8ff"), 2.0)
+		for index: int in 6:
+			var angle := TAU * float(index) / 6.0 + elapsed * 0.4
+			draw_circle(Vector2(0, -5) + Vector2.from_angle(angle) * 26.0, 1.5, Color("e3f7ff"))
 	if team == 1:
-		draw_rect(Rect2(-22, -43, 44, 4), Color("222c3a"))
-		draw_rect(Rect2(-22, -43, 44 * health.current / health.maximum, 4), Color("d78478"))
-	if casting != null:
-		draw_rect(Rect2(-22, -49, 44 * (1.0 - cast_remaining / cast_total), 3), Color("ffe0a0"))
-	draw_set_transform(Vector2.ZERO)
-
-func pixel(point: Vector2, size: Vector2, color: Color) -> void:
-	draw_rect(Rect2(point - Vector2.ONE, size + Vector2(2, 2)), Color("151a25"))
-	draw_rect(Rect2(point, size), color)
+		draw_rect(Rect2(-22, -47, 44, 4), Color("222c3a"))
+		draw_rect(Rect2(-22, -47, 44 * health.current / health.maximum, 4), Color("d78478"))
+	if casting != null and cast_total > 0.0:
+		draw_rect(Rect2(-22, -53, 44, 3), Color(0.06, 0.08, 0.12, 0.8))
+		draw_rect(Rect2(-22, -53, 44 * (1.0 - cast_remaining / cast_total), 3), Color("ffe0a0"))
 
 func draw_ellipse_shadow() -> void:
 	draw_set_transform(Vector2(0, 10), 0.0, Vector2(1.0, 0.35))

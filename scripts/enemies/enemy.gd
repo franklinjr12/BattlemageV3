@@ -20,7 +20,8 @@ func setup(owner_arena: Node2D, definition: EnemyData, difficulty: Dictionary, s
 	health.reset(definition.max_health * float(difficulty.health) * scaling)
 	statuses.resistance = definition.stagger_resistance
 	statuses.control_resistance = 0.55 if definition.id == "champion" else 1.0
-	visual = definition.visual
+	visual = definition.id
+	refresh_visual()
 	tint = definition.color
 	display_name = definition.display_name
 	body_radius = 22.0 if definition.profile == "tank" else 13.0

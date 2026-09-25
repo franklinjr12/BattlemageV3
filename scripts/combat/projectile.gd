@@ -7,6 +7,9 @@ func configure(caster: Fighter, definition: SpellData, aim: Vector2) -> void:
 	super.configure(caster, definition, aim)
 	position = caster.position
 	heading = SpellGeometry.direction(origin, target)
+	if visual_fx != null:
+		visual_fx.position = Vector2.ZERO
+		visual_fx.rotation = heading.angle()
 
 func _physics_process(delta: float) -> void:
 	if not arena.active:
@@ -18,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	position += heading * step
 	travelled += step
 	trail.push_front(position)
-	if trail.size() > 7:
+	if trail.size() > 8:
 		trail.pop_back()
 	# Swept segment collision prevents fast bolts tunnelling through actors.
 	var candidates: Array[Fighter] = []
@@ -44,10 +47,16 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 
 func _draw() -> void:
+	if spell == null:
+		return
 	var color: Color = Content.colors[spell.element]
-	for i: int in trail.size():
-		draw_rect(Rect2(trail[i] - position - Vector2(3, 3), Vector2(6, 6)), Color(color, 0.6 - i * 0.07))
-	draw_rect(Rect2(-5, -5, 10, 10), color)
-	draw_rect(Rect2(-2, -2, 4, 4), Color("fff1d3"))
 	if team == 1:
-		draw_arc(Vector2.ZERO, 9, 0, TAU, 8, Color("ff9286"), 2)
+		color = color.lerp(Color("f28c81"), 0.35)
+	if trail.size() >= 2:
+		var points := PackedVector2Array()
+		for point: Vector2 in trail:
+			points.append(point - position)
+		draw_polyline(points, Color(color, 0.32), 3.0, true)
+	for index: int in trail.size():
+		var fade := maxf(0.0, 0.3 - index * 0.035)
+		draw_circle(trail[index] - position, maxf(1.0, 3.2 - index * 0.24), Color(color, fade))

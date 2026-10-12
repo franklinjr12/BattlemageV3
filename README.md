@@ -2,6 +2,12 @@
 
 A Godot 4.7.2 desktop action demo. Open `project.godot` and press F6 on `scenes/main.tscn`, or F5 to play the project. The Windows release is `builds/BattlemageArena.exe`.
 
+## Art direction and AI agent guidelines
+
+The project's visual direction is documented in [Art Style & Asset Production Guide](docs/Battlemage_Arena_Art_Style_Guide.md), with the companion [Reference Spritesheet](docs/Battlemage_Arena_Reference_Spritesheet.png). **Read both before working on characters, animation, spells, VFX, arena rendering, HUD, menus, or other visuals.** The spritesheet is a visual mood/reference board, **not** a production-ready texture atlas; the Markdown guide specifies asset targets and Aseprite/Godot conventions. The target art style is proposed and may not yet be implemented in the game.
+
+Repository-level instructions for autonomous coding/art agents are in [AGENTS.md](AGENTS.md). Existing scripts and Resources remain authoritative for current gameplay.
+
 ## Play
 
 - Right mouse: move to a destination; also cancels spell selection.

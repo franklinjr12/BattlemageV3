@@ -18,119 +18,128 @@
     {
       "id": "actor_pyromancer",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_pyromancer.aseprite",
+      "source": "art/source/enemy_revamp/pyromancer.aseprite",
       "export": "art/sprites/actors/pyromancer.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/pyromancer.json"
     },
     {
       "id": "actor_cryomancer",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_cryomancer.aseprite",
+      "source": "art/source/enemy_revamp/cryomancer.aseprite",
       "export": "art/sprites/actors/cryomancer.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/cryomancer.json"
     },
     {
       "id": "actor_battlemage",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_battlemage.aseprite",
+      "source": "art/source/enemy_revamp/battlemage.aseprite",
       "export": "art/sprites/actors/battlemage.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/battlemage.json"
     },
     {
       "id": "actor_champion",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_champion.aseprite",
+      "source": "art/source/enemy_revamp/champion.aseprite",
       "export": "art/sprites/actors/champion.png",
-      "width": 256,
-      "height": 320,
+      "width": 672,
+      "height": 672,
       "frame_size": [
-        64,
-        64
+        96,
+        96
       ],
-      "frames": 20
+      "frames": 40,
+      "metadata": "art/source/enemy_revamp/champion.json"
     },
     {
       "id": "actor_golem",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_golem.aseprite",
+      "source": "art/source/enemy_revamp/golem.aseprite",
       "export": "art/sprites/actors/golem.png",
-      "width": 256,
-      "height": 320,
+      "width": 672,
+      "height": 480,
       "frame_size": [
-        64,
-        64
+        96,
+        96
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/golem.json"
     },
     {
       "id": "actor_hound",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_hound.aseprite",
+      "source": "art/source/enemy_revamp/hound.aseprite",
       "export": "art/sprites/actors/hound.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/hound.json"
     },
     {
       "id": "actor_skitter",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_skitter.aseprite",
+      "source": "art/source/enemy_revamp/skitter.aseprite",
       "export": "art/sprites/actors/skitter.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/skitter.json"
     },
     {
       "id": "actor_spitter",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_spitter.aseprite",
+      "source": "art/source/enemy_revamp/spitter.aseprite",
       "export": "art/sprites/actors/spitter.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/spitter.json"
     },
     {
       "id": "actor_wisp",
       "category": "actor",
-      "source": "art/source/visual_refactor/actor_wisp.aseprite",
+      "source": "art/source/enemy_revamp/wisp.aseprite",
       "export": "art/sprites/actors/wisp.png",
-      "width": 256,
+      "width": 448,
       "height": 320,
       "frame_size": [
         64,
         64
       ],
-      "frames": 20
+      "frames": 28,
+      "metadata": "art/source/enemy_revamp/wisp.json"
     },
     {
       "id": "fx_fireball",
@@ -798,7 +807,7 @@
     {
       "id": "ui_button_normal",
       "category": "ui_button",
-      "source": "art/source/visual_refactor/ui_button_normal.aseprite",
+      "source": "art/source/menu_revamp/button_normal.aseprite",
       "export": "art/sprites/ui/button_normal.png",
       "width": 96,
       "height": 40,
@@ -811,7 +820,7 @@
     {
       "id": "ui_button_hover",
       "category": "ui_button",
-      "source": "art/source/visual_refactor/ui_button_hover.aseprite",
+      "source": "art/source/menu_revamp/button_hover.aseprite",
       "export": "art/sprites/ui/button_hover.png",
       "width": 96,
       "height": 40,
@@ -824,7 +833,7 @@
     {
       "id": "ui_button_pressed",
       "category": "ui_button",
-      "source": "art/source/visual_refactor/ui_button_pressed.aseprite",
+      "source": "art/source/menu_revamp/button_pressed.aseprite",
       "export": "art/sprites/ui/button_pressed.png",
       "width": 96,
       "height": 40,
@@ -837,7 +846,7 @@
     {
       "id": "ui_button_disabled",
       "category": "ui_button",
-      "source": "art/source/visual_refactor/ui_button_disabled.aseprite",
+      "source": "art/source/menu_revamp/button_disabled.aseprite",
       "export": "art/sprites/ui/button_disabled.png",
       "width": 96,
       "height": 40,
@@ -850,7 +859,7 @@
     {
       "id": "ui_button_focus",
       "category": "ui_button",
-      "source": "art/source/visual_refactor/ui_button_focus.aseprite",
+      "source": "art/source/menu_revamp/button_focus.aseprite",
       "export": "art/sprites/ui/button_focus.png",
       "width": 96,
       "height": 40,
@@ -863,13 +872,338 @@
     {
       "id": "ui_button_selected",
       "category": "ui_button",
-      "source": "art/source/visual_refactor/ui_button_selected.aseprite",
+      "source": "art/source/menu_revamp/button_selected.aseprite",
       "export": "art/sprites/ui/button_selected.png",
       "width": 96,
       "height": 40,
       "frame_size": [
         96,
         40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_panel",
+      "category": "ui_panel",
+      "source": "art/source/menu_revamp/panel.aseprite",
+      "export": "art/sprites/ui/panel.png",
+      "width": 128,
+      "height": 96,
+      "frame_size": [
+        128,
+        96
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_modal",
+      "category": "ui_panel",
+      "source": "art/source/menu_revamp/modal.aseprite",
+      "export": "art/sprites/ui/modal.png",
+      "width": 128,
+      "height": 96,
+      "frame_size": [
+        128,
+        96
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_tooltip",
+      "category": "ui_panel",
+      "source": "art/source/menu_revamp/tooltip.aseprite",
+      "export": "art/sprites/ui/tooltip.png",
+      "width": 96,
+      "height": 64,
+      "frame_size": [
+        96,
+        64
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_portrait",
+      "category": "ui_panel",
+      "source": "art/source/menu_revamp/portrait.aseprite",
+      "export": "art/sprites/ui/portrait.png",
+      "width": 80,
+      "height": 80,
+      "frame_size": [
+        80,
+        80
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_tab",
+      "category": "ui_panel",
+      "source": "art/source/menu_revamp/tab.aseprite",
+      "export": "art/sprites/ui/tab.png",
+      "width": 96,
+      "height": 34,
+      "frame_size": [
+        96,
+        34
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_cinder_boots",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/cinder_boots.aseprite",
+      "export": "art/icons/gear/cinder_boots.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_cinder_staff",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/cinder_staff.aseprite",
+      "export": "art/icons/gear/cinder_staff.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_coal_ring",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/coal_ring.aseprite",
+      "export": "art/icons/gear/coal_ring.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_ember_robe",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/ember_robe.aseprite",
+      "export": "art/icons/gear/ember_robe.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_fault_staff",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/fault_staff.aseprite",
+      "export": "art/icons/gear/fault_staff.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_frost_boots",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/frost_boots.aseprite",
+      "export": "art/icons/gear/frost_boots.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_glacier_robe",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/glacier_robe.aseprite",
+      "export": "art/icons/gear/glacier_robe.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_granite_robe",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/granite_robe.aseprite",
+      "export": "art/icons/gear/granite_robe.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_horizon_ring",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/horizon_ring.aseprite",
+      "export": "art/icons/gear/horizon_ring.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_pilgrim_boots",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/pilgrim_boots.aseprite",
+      "export": "art/icons/gear/pilgrim_boots.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_prism_staff",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/prism_staff.aseprite",
+      "export": "art/icons/gear/prism_staff.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_quake_ring",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/quake_ring.aseprite",
+      "export": "art/icons/gear/quake_ring.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_rime_ring",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/rime_ring.aseprite",
+      "export": "art/icons/gear/rime_ring.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_scholar_robe",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/scholar_robe.aseprite",
+      "export": "art/icons/gear/scholar_robe.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_silk_robe",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/silk_robe.aseprite",
+      "export": "art/icons/gear/silk_robe.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_stone_boots",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/stone_boots.aseprite",
+      "export": "art/icons/gear/stone_boots.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_tempo_ring",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/tempo_ring.aseprite",
+      "export": "art/icons/gear/tempo_ring.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_wind_boots",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/wind_boots.aseprite",
+      "export": "art/icons/gear/wind_boots.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_winter_staff",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/winter_staff.aseprite",
+      "export": "art/icons/gear/winter_staff.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_gear_zephyr_staff",
+      "category": "gear_icon",
+      "source": "art/source/menu_revamp/gear/zephyr_staff.aseprite",
+      "export": "art/icons/gear/zephyr_staff.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
       ],
       "frames": 1
     },

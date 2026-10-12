@@ -7,6 +7,7 @@ var current_page: String = "title"
 var hud: Dictionary = {}
 var slot_buttons: Array[Button] = []
 var selected_build_slot: int = 0
+var selected_collection_tab: int = 0
 var creation_name: String = "Ash"
 var creation_appearance: int = 0
 var creation_package: String = "Emberweaver"
@@ -42,6 +43,19 @@ func _ready() -> void:
 					arena.player.destination = arena.player.position
 			elif page == "shop":
 				show_shop("spell")
+			elif page == "gear":
+				show_shop("gear")
+			elif page == "encounters":
+				show_encounters()
+			elif page == "level":
+				GameState.run.choices = 1
+				show_level_choices()
+			elif page == "reward":
+				GameState.last_result = {"victory": true, "stage": 0, "gold": 120, "xp": 75}
+				show_reward()
+			elif page == "pause":
+				start_combat(1)
+				show_settings(true)
 			elif page in ["build", "populated"]:
 				if page == "populated":
 					GameState.run.owned_gear = ["granite_robe", "prism_staff", "tempo_ring", "wind_boots"]
@@ -94,43 +108,64 @@ func clear_screen(page: String, keep_arena: bool = false) -> void:
 		arena = null
 	background.visible = page != "combat"
 
+
 func header(title: String, subtitle: String, back: Callable = Callable()) -> void:
-	var card: PanelContainer = UI.panel(screen, Rect2(35, 25, 1210, 96), Color("0d1826"))
-	var line: HBoxContainer = UI.row(card, 20)
-	var titles: VBoxContainer = UI.column(line, 3)
-	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	UI.label(titles, title, 27, UI.GOLD)
-	UI.label(titles, subtitle, 15, UI.MUTED)
+	var card: PanelContainer = UI.featured(screen,Rect2(30,19,1220,106))
+	var line: HBoxContainer = UI.row(card,16)
+	var sigil: VBoxContainer = UI.column(line,2)
+	UI.label(sigil,"✦",29,UI.GOLD)
+	var titles: VBoxContainer = UI.column(line,3)
+	titles.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	UI.label(titles,title,28,UI.GOLD)
+	UI.label(titles,subtitle,14,UI.MUTED,true)
 	if not GameState.run.is_empty():
-		UI.label(line, "Lv. %d    /    %d gold" % [int(GameState.run.level), int(GameState.run.gold)], 18, UI.GOLD)
+		var funds: VBoxContainer = UI.column(line,4)
+		UI.label(funds,"CURRENT BATTLEMAGE",11,UI.MUTED)
+		UI.label(funds,"Lv. %d    ◆ %d gold" % [int(GameState.run.level),int(GameState.run.gold)],17,UI.GOLD)
 	if back.is_valid():
-		UI.button(line, "Back", back)
+		UI.button(line,"← Back",back)
+
 
 func show_title() -> void:
 	clear_screen("title")
-	GameState.in_combat = false
-	var left: VBoxContainer = UI.column(UI.panel(screen, Rect2(80, 58, 555, 96), Color(0.04, 0.07, 0.11, 0.9)), 4)
-	UI.label(left, "THE LOCAL ARENA", 17, UI.GOLD)
-	UI.label(left, "Four schools. Four spells. One crown.", 23)
-	var box: VBoxContainer = UI.column(UI.panel(screen, Rect2(735, 155, 465, 480), Color("101c2a")), 16)
-	UI.label(box, "B A T T L E M A G E", 33, UI.GOLD)
-	UI.label(box, "A R E N A", 46, UI.WHITE)
-	UI.label(box, "LOCAL ASCENSION", 16, UI.MUTED)
-	UI.spacer(box, 6)
-	UI.label(box, "Shape your magic. Read your rival.\nEarn your place among the champions.", 18, UI.WHITE, true)
-	UI.spacer(box, 12)
-	UI.button(box, "Create a battlemage", confirm_new, true)
-	var resume: Button = UI.button(box, "Continue journey", func() -> void:
+	GameState.in_combat=false
+	var legend: VBoxContainer=UI.column(UI.featured(screen,Rect2(70,100,615,573)),13)
+	UI.section(legend,"THE LOCAL ARENA    /    ASCENSION")
+	UI.label(legend,"FOUR SCHOOLS. ONE CROWN.",29,UI.GOLD)
+	UI.label(legend,"Master the elements. Survive five trials.\nEarn your name among the champions.",17,UI.MUTED,true)
+	var fighters: HBoxContainer=UI.row(legend,9)
+	for actor_id: String in ["pyromancer","champion","cryomancer"]:
+		var frame: PanelContainer=PanelContainer.new()
+		frame.add_theme_stylebox_override("panel",UI.texture_skin("portrait"))
+		frame.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		fighters.add_child(frame)
+		var col: VBoxContainer=UI.column(frame,4)
+		UI.actor_portrait(col,actor_id,145)
+		UI.label(col,{"pyromancer":"FIRE","champion":"THE CROWN","cryomancer":"ICE"}[actor_id],13,UI.GOLD).horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	UI.rule(legend)
+	UI.label(legend,"FIRE   ◆   ICE   ◆   EARTH   ◆   AIR",18,UI.WHITE).horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	UI.spacer(legend,12)
+	UI.rule(legend)
+	UI.label(legend,"THE ARENA REMEMBERS EVERY CAST",21,UI.GOLD,true)
+	UI.label(legend,"Adapt your spells. Read your rivals. Your build is the difference between defeat and the crown.",15,UI.MUTED,true)
+	var box: VBoxContainer=UI.column(UI.featured(screen,Rect2(731,119,482,536),true),13)
+	UI.label(box,"B A T T L E M A G E",25,UI.GOLD)
+	UI.label(box,"A R E N A",49,UI.WHITE)
+	UI.label(box,"LOCAL ASCENSION",14,UI.MUTED)
+	UI.rule(box)
+	UI.label(box,"Choose your path, shape your spellbook,\nand stand before the crown.",17,UI.WHITE,true)
+	UI.spacer(box,8)
+	UI.button(box,"Create a battlemage",confirm_new,true)
+	var resume: Button=UI.button(box,"Continue journey",func() -> void:
 		if GameState.load_run():
 			if GameState.run.complete: show_completion()
 			else: show_hub()
 		else: show_notice(GameState.save_error))
-	resume.disabled = not FileAccess.file_exists(GameState.SAVE_PATH) and not FileAccess.file_exists(GameState.SAVE_PATH + ".bak")
-	var row: HBoxContainer = UI.row(box)
-	UI.button(row, "Settings", func() -> void: show_settings(false)).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	UI.button(row, "Quit", func() -> void: Sound.shutdown()).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var foot: Label = UI.label(screen, "PLAYABLE DEMO   /   v0.1.0                                       Mouse + keyboard   ·   No mana. Every cast counts.", 14, UI.MUTED)
-	foot.position = Vector2(80, 740)
+	resume.disabled=not FileAccess.file_exists(GameState.SAVE_PATH) and not FileAccess.file_exists(GameState.SAVE_PATH+".bak")
+	var utility: HBoxContainer=UI.row(box,8)
+	UI.button(utility,"Settings",func() -> void: show_settings(false)).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	UI.button(utility,"Quit",func() -> void: Sound.shutdown()).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	UI.label(box,"RIGHT-CLICK MOVE   ◆   Q/W/E/R SPELLS   ◆   SPACE DODGE",12,UI.MUTED,true)
 
 func confirm_new() -> void:
 	if not GameState.run.is_empty() or FileAccess.file_exists(GameState.SAVE_PATH):
@@ -138,72 +173,92 @@ func confirm_new() -> void:
 	else:
 		show_creation()
 
+
 func show_creation() -> void:
 	clear_screen("creation")
-	header("Create your battlemage", "Your first four spells are a starting point. Every school stays open to you.", show_title)
-	var identity: VBoxContainer = UI.column(UI.panel(screen, Rect2(55, 150, 340, 575)), 15)
-	UI.label(identity, "01  /  IDENTITY", 17, UI.GOLD)
-	UI.label(identity, "Battlemage name", 17)
-	var name_field: LineEdit = LineEdit.new()
-	name_field.text = creation_name
-	name_field.max_length = 24
-	name_field.custom_minimum_size.y = 48
-	name_field.text_changed.connect(func(value: String) -> void: creation_name = value)
+	header("Create your battlemage","Choose a mantle and one starting collection; every school remains available.",show_title)
+	var identity: VBoxContainer=UI.column(UI.featured(screen,Rect2(51,151,426,576)),10)
+	UI.section(identity,"01  /  IDENTITY")
+	UI.actor_portrait(identity,"player",105)
+	UI.label(identity,"THE UNTESTED MAGE",18,UI.GOLD)
+	UI.label(identity,"Your name will be spoken across the arena.",14,UI.MUTED,true)
+	UI.label(identity,"Battlemage name",16)
+	var name_field: LineEdit=LineEdit.new()
+	name_field.text=creation_name
+	name_field.max_length=24
+	name_field.custom_minimum_size.y=45
+	name_field.text_changed.connect(func(value: String) -> void: creation_name=value)
 	identity.add_child(name_field)
-	UI.spacer(identity, 10)
-	UI.label(identity, "Mantle color", 17)
+	UI.section(identity,"MANTLE APPEARANCE")
 	for index: int in 4:
-		var button: Button = UI.button(identity, ["Moonstone blue", "Ember orange", "Sunworn gold", "Verdant green"][index] + ("  ✓" if index == creation_appearance else ""), func() -> void: creation_appearance = index; show_creation())
-		button.modulate = [Color("83d5f5"), Color("f59a63"), Color("d4ba7a"), Color("9de3c5")][index]
-	UI.label(identity, "A name and a mantle.\nThe rest is earned in the arena.", 16, UI.MUTED, true)
-	var packages: VBoxContainer = UI.column(UI.panel(screen, Rect2(420, 150, 805, 575)), 14)
-	UI.label(packages, "02  /  STARTING MAGIC", 17, UI.GOLD)
+		var names: Array=["Moonstone blue","Ember orange","Sunworn gold","Verdant green"]
+		var palette: Array=[UI.ICE,UI.FIRE,UI.EARTH,UI.AIR]
+		var row: HBoxContainer=UI.row(identity,8)
+		UI.label(row,"◆",18,palette[index])
+		var color_button: Button=UI.button(row,names[index]+("  ✓" if index==creation_appearance else ""),func() -> void: creation_appearance=index; show_creation(),index==creation_appearance)
+		color_button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		color_button.custom_minimum_size.y=37
+	UI.label(identity,"Cosmetic choice only. Your spell schools remain flexible.",13,UI.MUTED,true)
+	var choices: VBoxContainer=UI.column(UI.featured(screen,Rect2(495,151,733,576)),9)
+	UI.section(choices,"02  /  STARTING MAGIC")
 	for package_name: String in Content.packages:
-		var data: Dictionary = Content.packages[package_name]
-		var card: PanelContainer = PanelContainer.new()
-		card.add_theme_stylebox_override("panel", UI.box(Color("18293a"), UI.GOLD if creation_package == package_name else Color("2c4054")))
-		packages.add_child(card)
-		var column: VBoxContainer = UI.column(card, 5)
-		UI.button(column, package_name + ("   /   SELECTED" if creation_package == package_name else ""), func() -> void: creation_package = package_name; show_creation())
-		UI.label(column, data.description, 15, UI.MUTED, true)
-		var names: PackedStringArray = []
-		for id: String in data.spells: names.append(Content.spells[id].display_name)
-		UI.label(column, "  /  ".join(names), 15, UI.WHITE, true)
-	UI.button(packages, "Enter the Local Arena", func() -> void: GameState.new_run(creation_name, creation_appearance, creation_package); show_hub(), true)
+		var pkg: Dictionary=Content.packages[package_name]
+		var selected: bool=creation_package==package_name
+		var frame: PanelContainer=PanelContainer.new()
+		frame.add_theme_stylebox_override("panel",UI.texture_skin("portrait" if selected else "tooltip"))
+		choices.add_child(frame)
+		var info: HBoxContainer=UI.row(frame,12)
+		var skill_id: String=str(pkg.spells[0])
+		UI.item_icon(info,Content.spells[skill_id].icon,56)
+		var details: VBoxContainer=UI.column(info,3)
+		details.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		UI.label(details,package_name.to_upper()+("   ◆ SELECTED" if selected else ""),18,UI.GOLD)
+		UI.label(details,pkg.description,13,UI.MUTED,true)
+		var spell_names: PackedStringArray=[]
+		for id: String in pkg.spells:spell_names.append(Content.spells[id].display_name)
+		UI.label(details,"  •  ".join(spell_names),13,UI.WHITE,true)
+		var choose: Button=UI.button(info,"SELECTED" if selected else "Choose",func() -> void: creation_package=package_name; show_creation(),selected)
+		choose.custom_minimum_size.x=108
+	UI.spacer(choices,5)
+	UI.button(choices,"Enter the Local Arena   →",func() -> void: GameState.new_run(creation_name,creation_appearance,creation_package); show_hub(),true)
+
 
 func show_hub() -> void:
 	if GameState.run.complete:
 		show_completion()
 		return
 	clear_screen("hub")
-	header("The antechamber", "%s  ·  Local Arena  ·  %d of 5 trials conquered" % [GameState.run.name, int(GameState.run.stage)], show_title)
-	var route: VBoxContainer = UI.column(UI.panel(screen, Rect2(55, 153, 570, 495), Color(0.04, 0.08, 0.12, 0.95)), 15)
-	UI.label(route, "THE ROAD TO THE CROWN", 17, UI.GOLD)
+	header("The antechamber","%s  ·  Local Arena  ·  %d of 5 trials conquered" % [GameState.run.name,int(GameState.run.stage)],show_title)
+	var route: VBoxContainer=UI.column(UI.featured(screen,Rect2(53,151,571,566)),8)
+	UI.section(route,"THE ROAD TO THE CROWN")
 	for index: int in Content.encounters.size():
-		var encounter: EncounterData = Content.encounters[index]
-		var mark: String = "✓" if index < int(GameState.run.stage) else "→" if index == int(GameState.run.stage) else "·"
-		UI.label(route, "%s   %02d  /  %s" % [mark, index + 1, encounter.display_name], 21, UI.GOLD if index == int(GameState.run.stage) else UI.MUTED)
-	UI.spacer(route, 10)
-	UI.label(route, "Victory restores your health. Defeat costs no gold and allows a fresh attempt. Shops refresh after each victory.", 16, UI.MUTED, true)
-	UI.label(route, "Run seed  %d" % int(GameState.run.seed), 13, UI.MUTED)
-	var next: VBoxContainer = UI.column(UI.panel(screen, Rect2(705, 153, 520, 545)), 15)
-	UI.label(next, "NEXT TRIAL", 16, UI.GOLD)
-	UI.label(next, Content.encounters[int(GameState.run.stage)].display_name, 30)
-	UI.label(next, Content.encounters[int(GameState.run.stage)].description, 17, UI.MUTED, true)
-	UI.spacer(next, 6)
-	UI.button(next, "Choose your challenge  →", show_encounters, true)
-	UI.button(next, "Character & spell loadout", show_build)
-	var shops: HBoxContainer = UI.row(next)
-	UI.button(shops, "Magic shop", func() -> void: show_shop("spell")).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	UI.button(shops, "Gear shop", func() -> void: show_shop("gear")).size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	if int(GameState.run.choices) > 0:
-		UI.button(next, "Choose level bonus  (%d)" % int(GameState.run.choices), show_level_choices, true)
-	UI.button(next, "Save & return to title", func() -> void: GameState.persist(); show_title())
+		var encounter: EncounterData=Content.encounters[index]
+		var status: String="CONQUERED" if index<int(GameState.run.stage) else ("NEXT CHALLENGE" if index==int(GameState.run.stage) else "LOCKED")
+		var card: VBoxContainer=UI.detail_card(route,"%02d    %s" % [index+1,encounter.display_name],status,UI.GOLD if index==int(GameState.run.stage) else UI.MUTED)
+		card.custom_minimum_size.y=49
+	UI.label(route,"Five trials. Every victory draws you closer to the crown.",14,UI.MUTED,true)
+	var next: VBoxContainer=UI.column(UI.featured(screen,Rect2(688,151,540,566),true),10)
+	UI.section(next,"YOUR NEXT TRIAL")
+	var next_encounter: EncounterData=Content.encounters[int(GameState.run.stage)]
+	var preview: HBoxContainer=UI.row(next,15)
+	var representative: Array=["pyromancer","cryomancer","hound","battlemage","champion"]
+	UI.actor_portrait(preview,representative[mini(int(GameState.run.stage),4)],132)
+	var description: VBoxContainer=UI.column(preview,4)
+	description.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	UI.label(description,next_encounter.display_name,30,UI.GOLD,true)
+	UI.label(description,next_encounter.description,15,UI.MUTED,true)
+	UI.rule(next)
+	UI.button(next,"Choose your challenge   →",show_encounters,true)
+	UI.button(next,"Character & spell loadout",show_build)
+	var shops: HBoxContainer=UI.row(next,7)
+	UI.button(shops,"Magic shop",func() -> void: show_shop("spell")).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	UI.button(shops,"Gear shop",func() -> void: show_shop("gear")).size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	if int(GameState.run.choices)>0:
+		UI.button(next,"Choose level bonus   (%d)" % int(GameState.run.choices),show_level_choices,true)
+	UI.button(next,"Save & return to title",func() -> void: GameState.persist(); show_title())
+	UI.label(next,"Victory restores health. Defeat does not cost gold.",13,UI.MUTED,true)
 	if not GameState.save_error.is_empty():
-		UI.label(next, GameState.save_error, 14, Color("f59a63"), true)
-	var tip: VBoxContainer = UI.column(UI.panel(screen, Rect2(55, 674, 570, 85)), 4)
-	UI.label(tip, "BUILD NOTE  /  Mixing schools is encouraged", 16, UI.GOLD)
-	UI.label(tip, "Freeze → Earth shatters. Vortex → area spells catches a crowd.", 14, UI.MUTED, true)
+		UI.label(next,GameState.save_error,14,UI.FIRE,true)
 
 func show_shop(kind: String) -> void:
 	clear_screen("shop")
@@ -214,105 +269,141 @@ func show_shop(kind: String) -> void:
 	for index: int in offers.size():
 		var id: String = offers[index]
 		var item: Resource = collection[id]
-		var box: VBoxContainer = UI.column(UI.panel(screen, Rect2(55 + index * 400, 164, 370, 483)), 18)
-		var icon: TextureRect = TextureRect.new()
-		icon.texture = item.icon
-		icon.custom_minimum_size = Vector2(64, 64)
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		box.add_child(icon)
-		UI.label(box, item.element.to_upper() if kind == "spell" else item.slot.to_upper(), 15, UI.GOLD)
-		UI.label(box, item.display_name, 27, UI.WHITE, true)
-		UI.label(box, item.description, 17, UI.MUTED, true)
+		var card: VBoxContainer = UI.column(UI.featured(screen, Rect2(43 + index * 400, 155, 386, 507), false), 11)
+		UI.section(card, "THE SPELLWRIGHT" if kind == "spell" else "THE QUARTERMASTER")
+		var banner: HBoxContainer = UI.row(card, 12)
+		var icon_frame: PanelContainer = PanelContainer.new()
+		icon_frame.add_theme_stylebox_override("panel",UI.texture_skin("portrait"))
+		banner.add_child(icon_frame)
+		UI.item_icon(icon_frame, item.icon, 84)
+		var item_info: VBoxContainer = UI.column(banner, 5)
+		item_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var item_type: String = item.element if kind == "spell" else item.slot
+		UI.label(item_info, item_type.to_upper(), 14, UI.color_for_school(item_type) if kind == "spell" else UI.GOLD)
+		UI.label(item_info, item.display_name, 24, UI.WHITE, true)
+		UI.label(item_info, "◆  OWNED" if owned.has(id) else "◆  AVAILABLE", 13, UI.MUTED)
+		UI.rule(card)
+		UI.label(card, item.description, 17, UI.WHITE, true)
+		UI.spacer(card, 8)
+		UI.section(card, "SPELL DETAILS" if kind == "spell" else "EQUIPMENT")
 		if kind == "spell":
-			UI.label(box, "%.0f damage\n%.1fs cooldown   /   %.1fs cast\n%s   /   %.0f range" % [item.damage, item.cooldown, item.cast_time, item.targeting.replace("_", " ").capitalize(), item.reach], 16)
+			UI.label(card, "%.0f DAMAGE    ◆    %.1fs COOLDOWN" % [item.damage, item.cooldown], 17, UI.GOLD, true)
+			UI.label(card, "%.1fs cast  /  %s targeting  /  %.0f range" % [item.cast_time,item.targeting.replace("_"," "),item.reach], 14, UI.MUTED, true)
 		else:
 			var equipped: String = GameState.run.equipment.get(item.slot, "")
-			UI.label(box, "Equipped: " + (Content.gear[equipped].display_name if not equipped.is_empty() else "None"), 15, UI.MUTED, true)
+			UI.label(card, item.description, 15, UI.MUTED, true)
+			UI.label(card, "Currently equipped: " + (Content.gear[equipped].display_name if not equipped.is_empty() else "None"), 14, UI.GOLD, true)
 		var space: Control = Control.new()
 		space.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		box.add_child(space)
-		var buy: Button = UI.button(box, "Owned" if owned.has(id) else "Acquire  ·  %d gold" % item.price, func() -> void: GameState.purchase(kind, id); show_shop(kind), true)
-		buy.disabled = owned.has(id) or int(GameState.run.gold) < item.price
+		card.add_child(space)
+		UI.rule(card)
+		UI.label(card, "◆  %d GOLD" % int(item.price), 21, UI.GOLD)
+		var buy: Button = UI.button(card, "Owned" if owned.has(id) else ("Insufficient gold" if int(GameState.run.gold)<item.price else "Acquire this item"), func() -> void: GameState.purchase(kind,id);show_shop(kind),true)
+		buy.disabled = owned.has(id) or int(GameState.run.gold)<item.price
 		buy.tooltip_text = item.tooltip(GameState.stats()) if kind == "spell" else item.description
 	if offers.is_empty():
-		UI.label(UI.column(UI.panel(screen, Rect2(250, 250, 780, 200))), "You own all available items in this collection.", 25, UI.GOLD)
-	var footer: VBoxContainer = UI.column(UI.panel(screen, Rect2(55, 679, 1170, 80)), 4)
-	UI.label(footer, "Acquired spells and gear go to your collection. Equip them on the Character & spell loadout screen.", 17, UI.MUTED, true)
-	UI.button(footer, "Open character & loadout", show_build)
+		UI.label(UI.column(UI.featured(screen,Rect2(250,250,780,200))),"You own all available items in this collection.",25,UI.GOLD)
+	var footer: VBoxContainer = UI.column(UI.panel(screen,Rect2(55,686,1170,76)),3)
+	UI.label(footer, "Purchased items join your collection. Equip them on the character and spell loadout screen.", 14,UI.MUTED,true)
+	UI.button(footer, "Open character & loadout   →", show_build)
 
 func show_build() -> void:
 	clear_screen("build")
-	header("%s  /  Character & build" % GameState.run.name, "Choose a QWER slot, then an owned spell. Equipping a spell already in use swaps the two slots.", show_hub)
+	header("%s  /  Character & build" % GameState.run.name, "Select a spell slot, then choose a spell or item from your collection.", show_hub)
 	var stats: Dictionary = GameState.stats()
-	var summary: VBoxContainer = UI.column(UI.panel(screen, Rect2(35, 144, 290, 610)), 12)
-	UI.label(summary, "BATTLEMAGE  ·  Lv. %d" % int(GameState.run.level), 20, UI.GOLD)
-	UI.label(summary, "%d XP   /   %s" % [int(GameState.run.xp), str(int(Content.economy.xp_thresholds[int(GameState.run.level)])) + " next level" if int(GameState.run.level) < 5 else "Level cap"], 15, UI.MUTED, true)
-	UI.label(summary, "%.0f maximum health\n+%.0f%% spell power\n-%.0f%% cooldown duration\n+%.0f%% movement speed\n+%.0f%% spell area\n-%.0f%% cast time" % [stats.max_hp, stats.power * 100, stats.cooldown * 100, stats.speed * 100, stats.area * 100, stats.cast_speed * 100], 17)
-	UI.spacer(summary, 6)
-	UI.label(summary, "EQUIPPED GEAR", 15, UI.GOLD)
-	for slot: String in ["Staff", "Robe", "Boots", "Ring"]:
-		var id: String = GameState.run.equipment.get(slot, "")
-		var gear_row: HBoxContainer = UI.row(summary, 4)
-		UI.label(gear_row, slot + "\n" + (Content.gear[id].display_name if not id.is_empty() else "None"), 14, UI.WHITE, true)
+	var summary: VBoxContainer = UI.column(UI.featured(screen,Rect2(32,145,292,607)),7)
+	UI.section(summary,"YOUR BATTLEMAGE")
+	var avatar: HBoxContainer = UI.row(summary,6)
+	UI.actor_portrait(avatar,"player",79)
+	var detail: VBoxContainer=UI.column(avatar,4)
+	UI.label(detail,GameState.run.name,21,UI.GOLD)
+	UI.label(detail,"LEVEL %d" % int(GameState.run.level),16,UI.WHITE)
+	UI.label(detail,"%d XP" % int(GameState.run.xp),13,UI.MUTED)
+	UI.rule(summary)
+	UI.label(summary,"%.0f HP  ◆  +%.0f%% POWER" % [stats.max_hp,stats.power*100],16,UI.WHITE)
+	UI.label(summary,"-%.0f%% COOLDOWN  ◆  +%.0f%% SPEED" % [stats.cooldown*100,stats.speed*100],14,UI.MUTED,true)
+	UI.label(summary,"+%.0f%% AREA  ◆  -%.0f%% CAST TIME" % [stats.area*100,stats.cast_speed*100],14,UI.MUTED,true)
+	UI.rule(summary)
+	UI.section(summary,"EQUIPPED GEAR")
+	for slot: String in ["Staff","Robe","Boots","Ring"]:
+		var id: String = GameState.run.equipment.get(slot,"")
+		var line: HBoxContainer = UI.row(summary,6)
 		if not id.is_empty():
-			var remove: Button = UI.button(gear_row, "×", func() -> void: GameState.unequip_gear(slot); show_build())
-			remove.tooltip_text = "Remove " + slot.to_lower()
-			remove.custom_minimum_size.y = 28
-	var loadout: VBoxContainer = UI.column(UI.panel(screen, Rect2(345, 144, 890, 119)), 7)
-	UI.label(loadout, "EQUIPPED SPELLS", 15, UI.GOLD)
-	var slots: HBoxContainer = UI.row(loadout, 8)
+			UI.item_icon(line, Content.gear[id].icon,38)
+		var txt: VBoxContainer=UI.column(line,1)
+		txt.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		UI.label(txt,slot.to_upper(),12,UI.MUTED)
+		UI.label(txt,Content.gear[id].display_name if not id.is_empty() else "Empty slot",14,UI.WHITE,true)
+		if not id.is_empty():
+			var remove: Button=UI.button(line,"×",func() -> void: GameState.unequip_gear(slot);show_build())
+			remove.tooltip_text="Unequip "+slot
+			remove.custom_minimum_size=Vector2(33,30)
+	var loadout: VBoxContainer = UI.column(UI.featured(screen,Rect2(339,145,897,159)),8)
+	UI.section(loadout,"Q W E R  /  EQUIPPED SPELLS")
+	var slots: HBoxContainer=UI.row(loadout,7)
 	for index: int in 4:
 		var spell: SpellData = Content.spells[GameState.run.loadout[index]]
-		var button: Button = UI.button(slots, "%s  /  %s" % [["Q", "W", "E", "R"][index], spell.display_name], func() -> void: selected_build_slot = index; show_build(), selected_build_slot == index)
-		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.tooltip_text = spell.tooltip(stats)
-	var tabs: TabContainer = TabContainer.new()
-	tabs.position = Vector2(345, 283)
-	tabs.size = Vector2(890, 471)
+		var button: Button=UI.button(slots,"%s  %s" % [["Q","W","E","R"][index],spell.display_name],func() -> void: selected_build_slot=index;show_build(), selected_build_slot==index)
+		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		button.custom_minimum_size.y=74
+		button.icon=spell.icon
+		button.expand_icon=true
+		button.icon_alignment=HORIZONTAL_ALIGNMENT_LEFT
+		button.tooltip_text=spell.tooltip(stats)
+	var tabs: TabContainer=TabContainer.new()
+	tabs.position=Vector2(339,321)
+	tabs.size=Vector2(897,433)
 	screen.add_child(tabs)
-	for kind: String in ["Spells", "Gear"]:
-		var scroll: ScrollContainer = ScrollContainer.new()
-		scroll.name = kind
+	for kind: String in ["Spells","Gear"]:
+		var scroll: ScrollContainer=ScrollContainer.new()
+		scroll.name=kind
 		tabs.add_child(scroll)
-		var list: VBoxContainer = UI.column(scroll, 9)
-		list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		var ids: Array = GameState.run.owned_spells if kind == "Spells" else GameState.run.owned_gear
-		if ids.is_empty(): UI.label(list, "Visit the gear shop to acquire your first item.", 18, UI.MUTED)
+		var list: VBoxContainer=UI.column(scroll,10)
+		list.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		var ids: Array=GameState.run.owned_spells if kind=="Spells" else GameState.run.owned_gear
+		if ids.is_empty():UI.label(list,"No items yet. Visit the magic or gear shop.",18,UI.MUTED)
 		for id: String in ids:
-			var item: Resource = Content.spells[id] if kind == "Spells" else Content.gear[id]
-			var card: PanelContainer = PanelContainer.new()
-			card.add_theme_stylebox_override("panel", UI.box())
+			var item: Resource = Content.spells[id] if kind=="Spells" else Content.gear[id]
+			var card: PanelContainer=PanelContainer.new()
+			card.add_theme_stylebox_override("panel",UI.texture_skin("tooltip"))
 			list.add_child(card)
-			var row: HBoxContainer = UI.row(card)
-			var desc: VBoxContainer = UI.column(row, 4)
-			desc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			UI.label(desc, item.display_name + "  ·  " + (item.element if kind == "Spells" else item.slot), 20, UI.GOLD)
-			UI.label(desc, item.description, 15, UI.MUTED, true)
-			var equip: Button = UI.button(row, "Equip to " + ["Q", "W", "E", "R"][selected_build_slot] if kind == "Spells" else "Equip", func() -> void:
-				if kind == "Spells": GameState.equip_spell(selected_build_slot, id)
-				else: GameState.equip_gear(id)
+			var content: HBoxContainer=UI.row(card,13)
+			UI.item_icon(content,item.icon,62)
+			var desc: VBoxContainer=UI.column(content,4)
+			desc.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+			var category: String = item.element if kind=="Spells" else item.slot
+			UI.label(desc,item.display_name+"  /  "+category,19,UI.color_for_school(category) if kind=="Spells" else UI.GOLD,true)
+			UI.label(desc,item.description,14,UI.MUTED,true)
+			var equip: Button=UI.button(content,"Equip to "+["Q","W","E","R"][selected_build_slot] if kind=="Spells" else "Equip",func() -> void:
+				if kind=="Spells":GameState.equip_spell(selected_build_slot,id)
+				else:GameState.equip_gear(id)
 				show_build())
-			equip.tooltip_text = item.tooltip(stats) if kind == "Spells" else item.description
+			equip.custom_minimum_size.x=158
+			equip.tooltip_text=item.tooltip(stats) if kind=="Spells" else item.description
+	tabs.current_tab=clampi(selected_collection_tab,0,1)
+	tabs.tab_changed.connect(func(index: int) -> void: selected_collection_tab=index)
 
 func show_encounters() -> void:
 	clear_screen("encounters")
-	var encounter: EncounterData = Content.encounters[int(GameState.run.stage)]
-	header(encounter.display_name, encounter.description, show_hub)
+	var encounter: EncounterData=Content.encounters[int(GameState.run.stage)]
+	header(encounter.display_name,encounter.description,show_hub)
 	for index: int in 3:
-		var data: Dictionary = Content.economy.difficulty[index]
-		var rewards: Dictionary = GameState.reward_for(int(GameState.run.stage), index, GameState.enemy_ids(int(GameState.run.stage), index))
-		var box: VBoxContainer = UI.column(UI.panel(screen, Rect2(65 + index * 400, 190, 350, 405)), 20)
-		UI.label(box, ["I", "II", "III"][index], 50, UI.GOLD)
-		UI.label(box, data.name, 30)
-		UI.label(box, ["Room to learn. Gentler damage and more breathing space.", "The intended challenge. Read each wind-up and commit to your casts.", "Relentless pressure. Faster attacks, stronger foes, and richer rewards."][index], 18, UI.MUTED, true)
-		UI.label(box, "%d gold  /  %d XP" % [rewards.gold, rewards.xp], 21, UI.GOLD)
-		UI.label(box, "%d wave%s" % [encounter.waves, "s" if encounter.waves > 1 else ""], 15, UI.MUTED)
-		UI.label(box, "%d%% enemy health · %d%% damage" % [roundi(float(data.health) * 100), roundi(float(data.damage) * 100)], 14, UI.MUTED)
-		UI.button(box, "Enter arena", func() -> void: start_combat(index), index == 1)
-	var rules: VBoxContainer = UI.column(UI.panel(screen, Rect2(65, 627, 1150, 126)), 5)
-	UI.label(rules, "RIGHT-CLICK move    /    Q W E R select    /    LEFT-CLICK cast    /    SPACE dodge    /    ESC pause", 17, UI.GOLD, true)
-	UI.label(rules, "All spells use cooldowns. Cast-time spells root you; dodge cancels the cast without spending its cooldown. Defeat preserves your build and gold.", 16, UI.MUTED, true)
+		var data: Dictionary=Content.economy.difficulty[index]
+		var rewards: Dictionary=GameState.reward_for(int(GameState.run.stage),index,GameState.enemy_ids(int(GameState.run.stage),index))
+		var panel: VBoxContainer=UI.column(UI.featured(screen,Rect2(52+index*401,161,373,478),index==1),10)
+		UI.section(panel,"TRIAL DIFFICULTY  /  "+["I","II","III"][index])
+		UI.label(panel,data.name,31,UI.GOLD if index==1 else UI.WHITE)
+		UI.actor_portrait(panel,["hound","pyromancer","champion"][index],96)
+		UI.label(panel,["INITIATE","ADEPT","MASTER"][index],17,UI.GOLD)
+		UI.label(panel,["Room to learn and read the arena.","The intended challenge.","Relentless pressure and greater rewards."][index],14,UI.MUTED,true)
+		UI.rule(panel)
+		UI.label(panel,"%d waves    ◆    %d%% health    ◆    %d%% damage" % [encounter.waves,roundi(float(data.health)*100),roundi(float(data.damage)*100)],14,UI.MUTED,true)
+		UI.label(panel,"◆ %d GOLD      ✦ %d XP" % [rewards.gold,rewards.xp],20,UI.GOLD)
+		UI.spacer(panel,12)
+		UI.button(panel,"Enter arena   →",func() -> void: start_combat(index),index==1)
+	var instructions: VBoxContainer=UI.column(UI.panel(screen,Rect2(65,664,1150,98)),5)
+	UI.label(instructions,"MOVE  Right-click    ◆    SPELLS  Q W E R    ◆    CAST  Left-click    ◆    DODGE  Space    ◆    PAUSE  Esc",15,UI.GOLD,true)
+	UI.label(instructions,"Cast-time spells root you. Dodge cancels a cast without spending its cooldown. Defeat preserves your gold and build.",14,UI.MUTED,true)
 
 func start_combat(difficulty: int) -> void:
 	clear_screen("combat")
@@ -431,50 +522,77 @@ func _process(_delta: float) -> void:
 	else:
 		hud.announcement.text = ""
 
+
 func show_reward() -> void:
 	clear_screen("reward")
-	var result: Dictionary = GameState.last_result
-	var won: bool = result.get("victory", false)
-	header("Victory · a step toward the crown" if won else "Defeat · the arena awaits your return", "Your progress has been saved." if GameState.save_error.is_empty() else GameState.save_error)
-	var box: VBoxContainer = UI.column(UI.panel(screen, Rect2(725, 163, 475, 495)), 22)
-	UI.label(box, "TRIAL CONQUERED" if won else "A LESSON, NOT AN END", 16, UI.GOLD)
-	UI.label(box, Content.encounters[int(result.get("stage", 0))].display_name, 31, UI.WHITE, true)
+	var result: Dictionary=GameState.last_result
+	var won: bool=result.get("victory",false)
+	header("Victory · a step toward the crown" if won else "Defeat · the arena awaits your return","Your progress has been saved." if GameState.save_error.is_empty() else GameState.save_error)
+	var left: VBoxContainer=UI.column(UI.featured(screen,Rect2(86,166,559,480)),13)
+	UI.section(left,"TRIAL RECORD")
+	UI.actor_portrait(left,"champion" if won else "hound",179)
+	UI.label(left,"TRIAL CONQUERED" if won else "RETURN STRONGER",30,UI.GOLD)
+	UI.label(left,Content.encounters[int(result.get("stage",0))].display_name,24,UI.WHITE,true)
+	UI.label(left,"Every duel teaches. The crown waits for those who persist.",16,UI.MUTED,true)
+	var right: VBoxContainer=UI.column(UI.featured(screen,Rect2(689,166,528,480),true),16)
+	UI.section(right,"BATTLE OUTCOME")
 	if won:
-		UI.label(box, "+%d gold\n+%d experience" % [result.gold, result.xp], 29, UI.GOLD)
-		UI.label(box, "%d / 5 trials completed\nShops have new stock. Health restored next battle." % int(GameState.run.stage), 18, UI.MUTED, true)
-		if int(GameState.run.choices) > 0:
-			UI.button(box, "Level %d  ·  Choose your bonus" % int(GameState.run.level), show_level_choices, true)
-		UI.button(box, "Claim the crown" if GameState.run.complete else "Return to antechamber", show_completion if GameState.run.complete else show_hub, true)
+		UI.label(right,"◆  +%d GOLD" % int(result.gold),29,UI.GOLD)
+		UI.label(right,"✦  +%d EXPERIENCE" % int(result.xp),24,UI.WHITE)
+		UI.rule(right)
+		UI.label(right,"%d / 5 trials completed" % int(GameState.run.stage),20,UI.GOLD)
+		UI.label(right,"New offers at the shops. Health restored next battle.",16,UI.MUTED,true)
+		if int(GameState.run.choices)>0:
+			UI.button(right,"Choose your level bonus",show_level_choices,true)
+		UI.button(right,"Claim the crown" if GameState.run.complete else "Return to antechamber",show_completion if GameState.run.complete else show_hub,true)
 	else:
-		UI.label(box, "No gold or experience lost. Study the wind-ups, change your build, and try again.", 19, UI.MUTED, true)
-		UI.button(box, "Choose difficulty & retry", show_encounters, true)
-		UI.button(box, "Return to antechamber", show_hub)
+		UI.label(right,"The arena awaits another attempt.",20,UI.WHITE,true)
+		UI.label(right,"No gold or experience lost. Study enemy wind-ups, adjust your loadout and retry.",17,UI.MUTED,true)
+		UI.button(right,"Choose difficulty & retry",show_encounters,true)
+		UI.button(right,"Return to antechamber",show_hub)
+
 
 func show_level_choices() -> void:
-	if int(GameState.run.choices) <= 0:
+	if int(GameState.run.choices)<=0:
 		show_hub()
 		return
 	clear_screen("level")
-	header("Grow your power", "%d level bonus choices remaining. Each choice lasts for this character." % int(GameState.run.choices), show_hub)
-	var choices: Array = [["max_hp", "VITALITY", "+25 maximum health"], ["power", "POTENCY", "+10% all spell damage"], ["cooldown", "RHYTHM", "-6% spell cooldown duration"], ["dodge_recharge", "AGILITY", "-12% dodge recharge time"], ["status_duration", "CONTROL", "+20% status duration"]]
-	var box: VBoxContainer = UI.column(UI.panel(screen, Rect2(700, 156, 515, 545)), 13)
+	header("Grow your power","%d bonus choices remaining. Each choice lasts for this character." % int(GameState.run.choices),show_hub)
+	var cards: VBoxContainer=UI.column(UI.featured(screen,Rect2(230,154,820,577),true),8)
+	UI.section(cards,"CHOOSE YOUR ASCENSION")
+	var choices: Array=[["max_hp","VITALITY","+25 maximum health"],["power","POTENCY","+10% all spell damage"],["cooldown","RHYTHM","-6% spell cooldown duration"],["dodge_recharge","AGILITY","-12% dodge recharge time"],["status_duration","CONTROL","+20% status duration"]]
 	for choice: Array in choices:
-		UI.label(box, choice[1], 16, UI.GOLD)
-		UI.button(box, choice[2], func() -> void: GameState.choose_bonus(choice[0]); show_level_choices())
+		var line: HBoxContainer=UI.row(cards,14)
+		var icon_label: Label=UI.label(line,"✦",21,UI.GOLD)
+		icon_label.custom_minimum_size.x=32
+		var value: VBoxContainer=UI.column(line,3)
+		value.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+		UI.label(value,choice[1],18,UI.GOLD)
+		UI.label(value,choice[2],14,UI.MUTED)
+		var pick: Button=UI.button(line,"CHOOSE",func() -> void: GameState.choose_bonus(choice[0]);show_level_choices())
+		pick.custom_minimum_size.x=139
+		UI.rule(cards)
+
 
 func show_completion() -> void:
 	clear_screen("completion")
-	header("Local Arena · conquered", "Your first crown is earned. This concludes the playable demo.")
-	var box: VBoxContainer = UI.column(UI.panel(screen, Rect2(718, 160, 500, 525)), 21)
-	UI.label(box, "THE CROWN IS YOURS", 30, UI.GOLD)
-	UI.label(box, "%s, Arena Champion" % GameState.run.name, 25, UI.WHITE, true)
-	UI.label(box, "Five trials. Four spell slots. A build of your own.", 20, UI.MUTED, true)
-	UI.label(box, "LOCAL  →  CITY  →  REGION\n→  NATION  →  THE BATTLEMAGE", 18, UI.GOLD, true)
-	UI.label(box, "Higher arenas belong to the full game. Begin again with another school and discover a different path.", 18, UI.MUTED, true)
-	UI.button(box, "Create another battlemage", confirm_new, true)
-	UI.button(box, "Return to title", show_title)
+	header("Local Arena · conquered","Your first crown is earned. This concludes the playable demo.")
+	var triumph: VBoxContainer=UI.column(UI.featured(screen,Rect2(88,142,570,591)),12)
+	UI.section(triumph,"THE VICTOR OF THE LOCAL ARENA")
+	UI.actor_portrait(triumph,"champion",236)
+	UI.label(triumph,"THE CROWN IS YOURS",32,UI.GOLD)
+	UI.label(triumph,"%s  /  ARENA CHAMPION" % GameState.run.name.to_upper(),21,UI.WHITE,true)
+	UI.label(triumph,"Five trials. Four spell slots. A build of your own.",16,UI.MUTED,true)
+	var next: VBoxContainer=UI.column(UI.featured(screen,Rect2(690,173,515,518),true),16)
+	UI.section(next,"A LEGEND BEGINS")
+	UI.label(next,"LOCAL  →  CITY  →  REGION\n→  NATION  →  THE BATTLEMAGE",21,UI.GOLD,true)
+	UI.rule(next)
+	UI.label(next,"Higher arenas belong to the full game. Begin again with a different starting school and shape a new legend.",18,UI.MUTED,true)
+	UI.spacer(next,16)
+	UI.button(next,"Create another battlemage",confirm_new,true)
+	UI.button(next,"Return to title",show_title)
 
-func make_overlay() -> VBoxContainer:
+func make_overlay(tall: bool = false) -> VBoxContainer:
 	if is_instance_valid(overlay):
 		screen.remove_child(overlay)
 		overlay.queue_free()
@@ -485,7 +603,7 @@ func make_overlay() -> VBoxContainer:
 	dim.color = Color(0.01, 0.02, 0.04, 0.85)
 	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	overlay.add_child(dim)
-	return UI.column(UI.panel(overlay, Rect2(370, 83, 540, 640)), 13)
+	return UI.column(UI.featured(overlay, Rect2(370, 86 if tall else 245, 540, 615 if tall else 310), true), 13)
 
 func close_overlay() -> void:
 	if is_instance_valid(overlay):
@@ -508,7 +626,7 @@ func show_modal(title: String, message: String, confirm: String, action: Callabl
 
 func show_settings(paused: bool) -> void:
 	get_tree().paused = paused
-	var box: VBoxContainer = make_overlay()
+	var box: VBoxContainer = make_overlay(true)
 	UI.label(box, "Combat paused" if paused else "Settings", 29, UI.GOLD)
 	for pair: Array in [["master", "Master volume"], ["music", "Music volume"], ["sfx", "Sound effects"], ["shake", "Screen shake"], ["ui_scale", "Text scale"], ["fx_quality", "Spell VFX intensity"]]:
 		var row: HBoxContainer = UI.row(box)

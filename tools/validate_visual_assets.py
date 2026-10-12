@@ -26,8 +26,15 @@ STATUSES = ["burn","chill","freeze","stagger","airborne","barrier","guard","invu
 
 def entries():
     for actor in ACTORS:
-        yield dict(id="actor_"+actor,category="actor",source=f"art/source/visual_refactor/actor_{actor}.aseprite",
-            export=f"art/sprites/actors/{actor}.png",width=256,height=320,frame_size=[64,64],frames=20)
+        if actor == "player":
+            yield dict(id="actor_player",category="actor",source="art/source/visual_refactor/actor_player.aseprite",
+                export="art/sprites/actors/player.png",width=256,height=320,frame_size=[64,64],frames=20)
+        else:
+            spec=json.loads((ROOT/f"art/source/enemy_revamp/{actor}.json").read_text(encoding="utf-8"))
+            w,h=spec["cell"]
+            yield dict(id="actor_"+actor,category="actor",source=f"art/source/enemy_revamp/{actor}.aseprite",
+                export=f"art/sprites/actors/{actor}.png",width=w*7,height=h*(7 if actor=="champion" else 5),frame_size=[w,h],frames=40 if actor=="champion" else 28,
+                metadata=f"art/source/enemy_revamp/{actor}.json")
     for spell in SPELLS:
         yield dict(id="fx_"+spell,category="spell",source=f"art/source/visual_refactor/spell_{spell}.aseprite",
             export=f"art/sprites/spells/{spell}.png",width=192,height=48,frame_size=[48,48],frames=4)
@@ -40,8 +47,15 @@ def entries():
         yield dict(id="prop_"+prop,category="environment_prop",source=f"art/source/visual_refactor/prop_{prop}.aseprite",
             export=f"art/sprites/props/{prop}.png",width=size[0],height=size[1],frame_size=list(size),frames=1)
     for button in BUTTONS:
-        yield dict(id="ui_button_"+button,category="ui_button",source=f"art/source/visual_refactor/ui_button_{button}.aseprite",
+        yield dict(id="ui_button_"+button,category="ui_button",source=f"art/source/menu_revamp/button_{button}.aseprite",
             export=f"art/sprites/ui/button_{button}.png",width=96,height=40,frame_size=[96,40],frames=1)
+    for component,w,h in [("panel",128,96),("modal",128,96),("tooltip",96,64),("portrait",80,80),("tab",96,34)]:
+        yield dict(id="ui_"+component,category="ui_panel",source=f"art/source/menu_revamp/{component}.aseprite",
+            export=f"art/sprites/ui/{component}.png",width=w,height=h,frame_size=[w,h],frames=1)
+    for gear in sorted((ROOT/"resources/gear").glob("*.tres")):
+        id=gear.stem
+        yield dict(id="icon_gear_"+id,category="gear_icon",source=f"art/source/menu_revamp/gear/{id}.aseprite",
+            export=f"art/icons/gear/{id}.png",width=48,height=48,frame_size=[48,48],frames=1)
     for status in STATUSES:
         yield dict(id="icon_status_"+status,category="status_icon",source=f"art/source/visual_refactor/status_{status}.aseprite",
             export=f"art/sprites/status/{status}.png",width=24,height=24,frame_size=[24,24],frames=1)
@@ -61,7 +75,23 @@ def run(write:bool):
         if not manifest_path.exists():raise ValueError("Missing manifest: "+str(manifest_path))
         saved=json.loads(manifest_path.read_text(encoding="utf-8"))
         if saved!=manifest:raise ValueError("Asset manifest drift; run --write and review changes")
+    # Validate individual enemy clip contracts rather than assuming a fixed 4x5 atlas.
     errors=[]
+    for actor in ACTORS:
+        if actor=="player":continue
+        metadata_path=ROOT/f"art/source/enemy_revamp/{actor}.json"
+        if not metadata_path.exists():
+            errors.append(f"{actor}: missing animation metadata")
+            continue
+        metadata=json.loads(metadata_path.read_text(encoding="utf-8"))
+        clips=metadata.get("clips",{})
+        if set(clips)!=({"idle","move","cast","hurt","death","barrier","phase"} if actor=="champion" else {"idle","move","cast","hurt","death"}):
+            errors.append(f"{actor}: incorrect animation tags")
+        if not metadata.get("pivot") or len(metadata["pivot"])!=2:
+            errors.append(f"{actor}: no pivot metadata")
+        for state,expected in ([("idle",6),("move",6),("cast",6),("hurt",3),("death",7),("barrier",6),("phase",6)] if actor=="champion" else [("idle",6),("move",6),("cast",6),("hurt",3),("death",7)]):
+            if clips.get(state,{}).get("frames")!=expected:
+                errors.append(f"{actor}/{state}: invalid frame count")
     for item in manifest["assets"]:
         source=ROOT/item["source"]; export=ROOT/item["export"]
         if not source.is_file():errors.append(f"{item['id']} missing Aseprite source {source}")

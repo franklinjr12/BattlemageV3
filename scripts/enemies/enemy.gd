@@ -5,6 +5,7 @@ var dodge_clock: float = 0.0
 var attack_cursor: int = 0
 var ai_state: String = "approach"
 var champion_phase: bool = false
+var phase_fx_time: float = 0.0
 var aggression: float = 1.0
 var last_player_position: Vector2
 var observed_velocity: Vector2 = Vector2.ZERO
@@ -32,6 +33,7 @@ func setup(owner_arena: Node2D, definition: EnemyData, difficulty: Dictionary, s
 	dodge_timers = [0.0]
 
 func think(delta: float) -> void:
+	phase_fx_time = maxf(0.0, phase_fx_time - delta)
 	if statuses.rooted():
 		ai_state = "stunned"
 		return
@@ -40,6 +42,7 @@ func think(delta: float) -> void:
 		return
 	if data.id == "champion" and not champion_phase and health.current < health.maximum * 0.5:
 		champion_phase = true
+		phase_fx_time = 0.8
 		move_speed *= 1.2
 		aggression *= 1.25
 		barrier = 80.0
@@ -109,3 +112,14 @@ func think(delta: float) -> void:
 			attack_cursor = (slot + 1) % loadout.size()
 			ai_state = "attack"
 			break
+
+
+## Only affects the artwork; barrier and phase gameplay remain authoritative elsewhere.
+func update_visual_state() -> void:
+	super.update_visual_state()
+	if fighter_sprite == null or data == null or data.id != "champion" or health.dead:
+		return
+	if phase_fx_time > 0.0:
+		fighter_sprite.set_state(&"phase", facing, false, false)
+	elif barrier > 0.0 and casting == null and flash <= 0.0:
+		fighter_sprite.set_state(&"barrier", facing, false, false)

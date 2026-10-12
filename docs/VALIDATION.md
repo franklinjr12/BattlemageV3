@@ -44,3 +44,9 @@ Raw metrics are in `performance.json`. Screenshots were rendered and visually in
 - Conduct subjective visual/audio polish and longer hardware/stability testing.
 
 `PLAYTEST.md` is the recording checklist. `BACKLOG_STATUS.md` maps every backlog range to its implementation/acceptance status. No human acceptance result is inferred from the automated runs.
+
+
+## Enemy and menu revamp follow-up (2026-10-12)
+
+The new 9-enemy/20-gear/menu-theme implementation has independent visual evidence and reproducible sources under [docs/revamp_validation](revamp_validation/README.md).
+Test commands: use Godot --headless --path <project> res://tests/tests.tscn for the 160-check existing suite (do not add --quit-after 1), and similarly res://tests/test_revamp.tscn for the dedicated 131-check UI/actor suite. Python tools/validate_visual_assets.py checks 100 source/PNG pairs. The Aseprite Lua source validator checks the precise animation-tag frame ranges. For actual scene screenshots and before/after pairs, see the linked report.

@@ -1,5 +1,8 @@
 # Battlemage Arena — Visual Refactor Implementation Status
 
+> **2026-10-12 follow-up:** A new enemy-and-menu production pass has now been applied. The older status table below describes the *previous* baseline and is kept as history. For current sprite/menu source paths, test results, real screenshots and candid remaining art-quality differences, read [Enemy and Menu Revamp Validation](revamp_validation/README.md). The complete implementation task definitions are in [the epic](EPIC_enemy_sprites_and_menu_revamp.md).
+
+
 **Date:** 2026-10-12  
 **Scope:** Current, partial implementation of the approved visual refactor epic.  
 **Authoritative design:** [Art Style Guide](Battlemage_Arena_Art_Style_Guide.md) and [Visual Reference Spritesheet](Battlemage_Arena_Reference_Spritesheet.png).  

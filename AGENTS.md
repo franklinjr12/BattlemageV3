@@ -1,5 +1,12 @@
 # Battlemage Arena — Agent Instructions
 
+## Current enemy and menu assets (updated 2026-10-12)
+
+This section supersedes any older dimensions or regeneration notes below. New canonical Aseprite enemy sources are in art/source/enemy_revamp, and menu/gear sources are in art/source/menu_revamp. Regenerate only runtime exports through tools/export_enemy_sources.lua and tools/export_menu_sources.lua; never run older refactor/import/bootstrap scripts over refined hand-authored Aseprite files. Validate the 100 manifest entries with python tools/validate_visual_assets.py and all nine timeline tag ranges with tools/validate_enemy_sources.lua. See docs/revamp_validation/README.md.
+
+The player still uses a 64x64 four-column legacy atlas. Ordinary enemies now have 64x64 cells, and golem/Aurel 96x96, in seven-column sheets with actor-specific clips. The champion includes phase/barrier. scripts/effects/fighter_sprite.gd reads art/source/enemy_revamp JSON metadata. Spell FX use their current 48px cells. Combat rules and save data stay authoritative.
+
+
 These instructions apply to the entire repository. Keep changes scoped to the requested work and use the actual Godot project as the source of truth for implemented functionality.
 
 ## Implementation status and regeneration

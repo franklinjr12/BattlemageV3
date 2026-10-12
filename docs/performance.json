@@ -1,12 +1,12 @@
 {
-	"adapter": "Intel(R) UHD Graphics",
+	"adapter": "",
 	"arena_cycles": 3,
-	"frames": 652,
-	"mean_frame_ms": 16.8843962167689,
+	"frames": 1494,
+	"mean_frame_ms": 7.36394576284955,
 	"nodes_after_cleanup": 18.0,
-	"p95_frame_ms": 16.6666666666667,
-	"peak_effects": 23,
+	"p95_frame_ms": 8.33333333333333,
+	"peak_effects": 24,
 	"peak_nodes": 150,
-	"static_memory_end": 35784366.0,
-	"static_memory_start": 34037908.0
+	"static_memory_end": 60911933.0,
+	"static_memory_start": 31236833.0
 }

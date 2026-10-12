@@ -1,7 +1,8 @@
 class_name ArenaDirector extends Node2D
 signal finished(result: Dictionary)
 const CENTER: Vector2 = Vector2(640, 399)
-const RADIUS: float = 293.0
+const RADIUS: float = 1400.0
+var camera: Camera2D
 var player: PlayerFighter
 var enemies: Array[EnemyFighter] = []
 var effects: Node2D
@@ -41,6 +42,12 @@ func begin(encounter_stage: int, selected_difficulty: int) -> void:
 	player.setup(self)
 	player.position = CENTER + Vector2(-150, 0) if Content.encounters[stage].kind != "creatures" else CENTER
 	actors.add_child(player)
+	camera = Camera2D.new()
+	camera.name = "PlayerCamera"
+	camera.position_smoothing_enabled = false
+	camera.zoom = Vector2.ONE
+	player.add_child(camera)
+	camera.make_current()
 	player.died.connect(_fighter_died)
 	spawn_wave()
 	if Content.encounters[stage].boss:
@@ -76,7 +83,7 @@ func inside(point: Vector2, margin: float = 0.0) -> bool:
 	return point.distance_to(CENTER) <= RADIUS - margin
 
 func clamp_position(point: Vector2, margin: float = 12.0) -> Vector2:
-	return CENTER + (point - CENTER).limit_length(RADIUS - margin)
+	return CENTER + (point - CENTER).limit_length(RADIUS - margin - 1.0)
 
 func _fighter_died(_fighter: Fighter) -> void:
 	# Resolve at frame boundary so simultaneous damage consistently favors defeat.

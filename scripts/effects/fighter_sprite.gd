@@ -1,6 +1,6 @@
 class_name FighterSprite extends AnimatedSprite2D
 
-const FRAME_SIZE := Vector2(48, 48)
+const FRAME_SIZE := Vector2(64, 64)
 const FRAME_COUNT := 4
 const ANIMATIONS := {
 	"idle": {"row": 0, "fps": 4.5, "loop": true},

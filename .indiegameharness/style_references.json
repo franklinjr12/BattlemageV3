@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "references": [
+    {
+      "id": "combat_visual_validation",
+      "type": "screenshot",
+      "path": "docs/screenshots/combat.png",
+      "tags": [
+        "visual_refactor"
+      ],
+      "notes": "Captured in running Godot after initial implementation",
+      "dimensions": null
+    },
+    {
+      "id": "visual_capture_arena_edge",
+      "type": "screenshot",
+      "path": "docs/screenshots/arena_edge.png",
+      "tags": [
+        "visual_refactor"
+      ],
+      "notes": "Screenshot from latest Godot visual refactor",
+      "dimensions": null
+    },
+    {
+      "id": "visual_capture_magic",
+      "type": "screenshot",
+      "path": "docs/screenshots/magic.png",
+      "tags": [
+        "visual_refactor",
+        "vfx"
+      ],
+      "notes": "Actual 4-school simultaneous visual effects in Godot",
+      "dimensions": null
+    },
+    {
+      "id": "visual_capture_title",
+      "type": "screenshot",
+      "path": "docs/screenshots/title.png",
+      "tags": [
+        "visual_refactor"
+      ],
+      "notes": "Screenshot from latest Godot visual refactor",
+      "dimensions": null
+    }
+  ]
+}

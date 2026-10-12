@@ -1,45 +1,65 @@
 class_name UI extends RefCounted
-const INK: Color = Color("101b2a")
-const MUTED: Color = Color("91a3b7")
-const GOLD: Color = Color("dfc58d")
-const WHITE: Color = Color("e5e8e8")
+const INK: Color = Color("111d2d")
+const MUTED: Color = Color("a7b1c0")
+const GOLD: Color = Color("e0c28a")
+const WHITE: Color = Color("e8e8e3")
 
-static func box(color: Color = INK, border: Color = Color("2c4054"), radius: int = 8) -> StyleBoxFlat:
-	var style: StyleBoxFlat = StyleBoxFlat.new()
+static func box(color: Color = INK, border: Color = Color("465163"), radius: int = 2) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
 	style.bg_color = color
 	style.border_color = border
-	style.set_border_width_all(1)
+	style.set_border_width_all(2)
 	style.set_corner_radius_all(radius)
-	style.content_margin_left = 16
-	style.content_margin_right = 16
-	style.content_margin_top = 12
-	style.content_margin_bottom = 12
+	style.anti_aliasing = false
+	style.content_margin_left = 14
+	style.content_margin_right = 14
+	style.content_margin_top = 10
+	style.content_margin_bottom = 10
+	return style
+
+static func pixel_button(state: String) -> StyleBoxTexture:
+	var style := StyleBoxTexture.new()
+	style.texture = load("res://art/sprites/ui/button_%s.png" % state)
+	style.set_texture_margin_all(10.0)
+	style.content_margin_left = 14
+	style.content_margin_right = 14
+	style.content_margin_top = 9
+	style.content_margin_bottom = 9
+	return style
+
+static func progress_style(color: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = color
+	style.set_corner_radius_all(1)
+	style.anti_aliasing = false
+	style.set_content_margin_all(0)
 	return style
 
 static func theme() -> Theme:
-	var value: Theme = Theme.new()
+	var value := Theme.new()
 	value.default_font_size = 17
 	value.set_color("font_color", "Label", WHITE)
 	value.set_color("font_color", "Button", WHITE)
 	value.set_color("font_hover_color", "Button", GOLD)
-	value.set_color("font_disabled_color", "Button", Color("64778b"))
+	value.set_color("font_pressed_color", "Button", Color("fff4d5"))
+	value.set_color("font_disabled_color", "Button", Color("718092"))
 	for node_type: String in ["Button", "OptionButton"]:
-		value.set_stylebox("normal", node_type, box(Color("19293b")))
-		value.set_stylebox("hover", node_type, box(Color("263b4c"), GOLD))
-		value.set_stylebox("pressed", node_type, box(Color("314052"), GOLD))
-		value.set_stylebox("disabled", node_type, box(Color("111d2a"), Color("253448")))
-		value.set_stylebox("focus", node_type, box(Color(0, 0, 0, 0), GOLD))
-	value.set_stylebox("normal", "LineEdit", box(Color("0c1523"), Color("4a6275")))
+		value.set_stylebox("normal", node_type, pixel_button("normal"))
+		value.set_stylebox("hover", node_type, pixel_button("hover"))
+		value.set_stylebox("pressed", node_type, pixel_button("pressed"))
+		value.set_stylebox("disabled", node_type, pixel_button("disabled"))
+		value.set_stylebox("focus", node_type, pixel_button("focus"))
+	value.set_stylebox("normal", "LineEdit", box(Color("0c1622"), Color("7f846c")))
 	value.set_color("font_color", "LineEdit", WHITE)
-	value.set_stylebox("background", "ProgressBar", box(Color("07101b"), Color("2a3e51"), 3))
-	value.set_stylebox("fill", "ProgressBar", box(Color("93c7b8"), Color("93c7b8"), 3))
+	value.set_stylebox("background", "ProgressBar", progress_style(Color("07111d")))
+	value.set_stylebox("fill", "ProgressBar", progress_style(Color("c76c65")))
 	value.set_stylebox("panel", "PopupMenu", box())
-	value.set_stylebox("panel", "TooltipPanel", box(Color("152537"), GOLD))
+	value.set_stylebox("panel", "TooltipPanel", box(Color("17283b"), GOLD))
 	value.set_color("font_color", "TooltipLabel", WHITE)
 	return value
 
 static func panel(parent: Node, rect: Rect2, color: Color = INK) -> PanelContainer:
-	var node: PanelContainer = PanelContainer.new()
+	var node := PanelContainer.new()
 	node.position = rect.position
 	node.size = rect.size
 	node.add_theme_stylebox_override("panel", box(color))
@@ -47,19 +67,19 @@ static func panel(parent: Node, rect: Rect2, color: Color = INK) -> PanelContain
 	return node
 
 static func column(parent: Node, gap: int = 10) -> VBoxContainer:
-	var node: VBoxContainer = VBoxContainer.new()
+	var node := VBoxContainer.new()
 	node.add_theme_constant_override("separation", gap)
 	parent.add_child(node)
 	return node
 
 static func row(parent: Node, gap: int = 12) -> HBoxContainer:
-	var node: HBoxContainer = HBoxContainer.new()
+	var node := HBoxContainer.new()
 	node.add_theme_constant_override("separation", gap)
 	parent.add_child(node)
 	return node
 
 static func label(parent: Node, text: String, font_size: int = 18, color: Color = WHITE, wrap: bool = false) -> Label:
-	var node: Label = Label.new()
+	var node := Label.new()
 	node.text = text
 	node.add_theme_font_size_override("font_size", roundi(font_size * float(GameState.settings.ui_scale)))
 	node.add_theme_color_override("font_color", color)
@@ -70,27 +90,28 @@ static func label(parent: Node, text: String, font_size: int = 18, color: Color 
 	return node
 
 static func button(parent: Node, text: String, action: Callable, primary: bool = false) -> Button:
-	var node: Button = Button.new()
+	var node := Button.new()
 	node.text = text
 	node.custom_minimum_size.y = 43
 	node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	if primary:
-		node.add_theme_stylebox_override("normal", box(Color("bba370"), GOLD))
-		node.add_theme_color_override("font_color", Color("111b28"))
+		node.add_theme_stylebox_override("normal", pixel_button("selected"))
+		node.add_theme_color_override("font_color", Color("f9e2b4"))
 	node.pressed.connect(func() -> void: Sound.cue("ui", -8); action.call())
 	parent.add_child(node)
 	return node
 
-static func bar(parent: Node, value: float, maximum: float) -> ProgressBar:
-	var node: ProgressBar = ProgressBar.new()
+static func bar(parent: Node, value: float, maximum: float, fill_color: Color = Color("c76c65")) -> ProgressBar:
+	var node := ProgressBar.new()
 	node.custom_minimum_size.y = 12
 	node.max_value = maximum
 	node.value = value
 	node.show_percentage = false
+	node.add_theme_stylebox_override("fill", progress_style(fill_color))
 	parent.add_child(node)
 	return node
 
 static func spacer(parent: Node, height: float) -> void:
-	var node: Control = Control.new()
+	var node := Control.new()
 	node.custom_minimum_size.y = height
 	parent.add_child(node)

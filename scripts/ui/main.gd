@@ -34,9 +34,12 @@ func _ready() -> void:
 		var page: String = args[index + 1] if args.size() > index + 1 else "title"
 		if page != "title":
 			GameState.new_run("Ash", 0, "Emberweaver", 12345)
-			if page in ["combat", "champion"]:
+			if page in ["combat", "champion", "arena_edge", "magic"]:
 				if page == "champion": GameState.run.stage = 4
 				start_combat(1)
+				if page == "arena_edge":
+					arena.player.position = ArenaDirector.CENTER + Vector2(ArenaDirector.RADIUS - 160.0, 0.0)
+					arena.player.destination = arena.player.position
 			elif page == "shop":
 				show_shop("spell")
 			elif page in ["build", "populated"]:
@@ -60,6 +63,14 @@ func capture(page: String) -> void:
 	Input.warp_mouse(Vector2(630, 650))
 	for frame: int in 150:
 		await get_tree().process_frame
+		if page == "magic" and frame == 140 and is_instance_valid(arena):
+			arena.intro = 0.0
+			arena.active = true
+			var actor: PlayerFighter = arena.player
+			actor.execute_spell(Content.spells.fireball, actor.position + Vector2(155, -85))
+			actor.execute_spell(Content.spells.frost_nova, actor.position)
+			actor.execute_spell(Content.spells.vortex, actor.position + Vector2(-140, 100))
+			actor.execute_spell(Content.spells.earth_pillar, actor.position + Vector2(100, 115))
 	if is_instance_valid(arena):
 		arena.player.selected = Content.spells["fireball"]
 	await RenderingServer.frame_post_draw
@@ -312,48 +323,56 @@ func start_combat(difficulty: int) -> void:
 	build_hud()
 
 func build_hud() -> void:
-	var top: VBoxContainer = UI.column(UI.panel(screen, Rect2(345, 16, 590, 67), Color(0.035, 0.065, 0.10, 0.94)), 2)
-	hud.title = UI.label(top, Content.encounters[arena.stage].display_name.to_upper(), 20, UI.GOLD)
+	var top: VBoxContainer = UI.column(UI.panel(screen, Rect2(394, 14, 492, 60), Color(0.035, 0.065, 0.10, 0.91)), 1)
+	hud.title = UI.label(top, Content.encounters[arena.stage].display_name.to_upper(), 19, UI.GOLD)
 	hud.title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hud.encounter = UI.label(top, "", 14, UI.MUTED)
+	hud.encounter = UI.label(top, "", 13, UI.MUTED)
 	hud.encounter.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var health_box: VBoxContainer = UI.column(UI.panel(screen, Rect2(22, 205, 228, 211)), 10)
-	UI.label(health_box, GameState.run.name.to_upper(), 20, UI.GOLD)
-	hud.health = UI.label(health_box, "", 18)
-	hud.health_bar = UI.bar(health_box, arena.player.health.current, arena.player.health.maximum)
-	hud.dodge = UI.label(health_box, "", 15, UI.MUTED)
-	hud.status = UI.label(health_box, "", 13, UI.GOLD, true)
-	var guide: VBoxContainer = UI.column(UI.panel(screen, Rect2(1030, 194, 228, 300)), 12)
-	UI.label(guide, "COMBAT FIELD GUIDE", 14, UI.GOLD)
-	UI.label(guide, "RMB   Move\nQWER   Select spell\nLMB   Confirm cast\nSPACE   Dodge\nESC   Cancel / pause", 16, UI.WHITE)
-	hud.selection = UI.label(guide, "Select a spell to see its range.", 15, UI.MUTED, true)
-	UI.button(guide, "Pause", func() -> void: show_settings(true))
-	var cast_box: VBoxContainer = UI.column(UI.panel(screen, Rect2(22, 437, 228, 111)), 7)
-	hud.cast = UI.label(cast_box, "READY", 14, UI.GOLD, true)
-	hud.cast_bar = UI.bar(cast_box, 0, 1)
-	var bottom: HBoxContainer = UI.row(UI.panel(screen, Rect2(257, 709, 766, 78)), 8)
+
+	var player_box: VBoxContainer = UI.column(UI.panel(screen, Rect2(18, 16, 318, 184), Color(0.032, 0.065, 0.11, 0.93)), 5)
+	var header_row: HBoxContainer = UI.row(player_box, 10)
+	var portrait: TextureRect = TextureRect.new()
+	var portrait_atlas := AtlasTexture.new()
+	portrait_atlas.atlas = load("res://art/sprites/actors/player.png")
+	portrait_atlas.region = Rect2(0, 0, 48, 48)
+	portrait.texture = portrait_atlas
+	portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	portrait.custom_minimum_size = Vector2(42, 42)
+	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	header_row.add_child(portrait)
+	var identity: VBoxContainer = UI.column(header_row, 2)
+	UI.label(identity, "%s   ·   LV %d" % [GameState.run.name.to_upper(), int(GameState.run.level)], 19, UI.GOLD)
+	hud.health = UI.label(identity, "", 15)
+	hud.health_bar = UI.bar(player_box, arena.player.health.current, arena.player.health.maximum)
+	hud.dodge = UI.label(player_box, "", 15, Color("b3e5e7"))
+	hud.cast = UI.label(player_box, "READY TO CAST", 14, UI.GOLD)
+	hud.cast_bar = UI.bar(player_box, 0, 1, Color("d9ae69"))
+	hud.status = UI.label(player_box, "", 12, UI.MUTED, true)
+	hud.status_icons = UI.row(player_box, 4)
+	hud.status_icon_keys = ""
+
+	var bottom: HBoxContainer = UI.row(UI.panel(screen, Rect2(265, 708, 750, 78), Color(0.04, 0.07, 0.12, 0.95)), 8)
 	for index: int in 4:
 		var spell: SpellData = Content.spells[arena.player.loadout[index]]
 		var button: Button = UI.button(bottom, "", func() -> void: arena.player.select_slot(index))
-		button.custom_minimum_size = Vector2(168, 52)
+		button.custom_minimum_size = Vector2(170, 53)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.icon = spell.icon
 		button.expand_icon = true
-		button.add_theme_constant_override("icon_max_width", 20)
-		button.add_theme_font_size_override("font_size", 15)
+		button.add_theme_constant_override("icon_max_width", 40)
+		button.add_theme_font_size_override("font_size", 14)
 		button.tooltip_text = spell.tooltip(arena.player.modifiers)
 		slot_buttons.append(button)
-	hud.announcement = UI.label(screen, "", 35, UI.GOLD)
-	hud.announcement.position = Vector2(310, 336)
-	hud.announcement.size = Vector2(660, 80)
+
+	hud.announcement = UI.label(screen, "", 32, UI.GOLD)
+	hud.announcement.position = Vector2(345, 330)
+	hud.announcement.size = Vector2(590, 74)
 	hud.announcement.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hud.announcement.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var tutorial: VBoxContainer = UI.column(UI.panel(screen, Rect2(22, 563, 228, 185)), 7)
-	hud.tutorial_box = tutorial.get_parent()
-	hud.tutorial = UI.label(tutorial, "", 14, UI.MUTED, true)
-	UI.button(tutorial, "Got it · hide tips", func() -> void: arena.player.dismiss_tutorial())
+
 	if Content.encounters[arena.stage].kind != "creatures":
-		var boss: VBoxContainer = UI.column(UI.panel(screen, Rect2(450, 88, 380, 70)), 4)
+		var boss: VBoxContainer = UI.column(UI.panel(screen, Rect2(466, 81, 348, 65), Color(0.05, 0.08, 0.12, 0.91)), 2)
 		hud.boss_name = UI.label(boss, arena.enemies[0].display_name, 15, UI.GOLD)
 		hud.boss = UI.bar(boss, 100, 100)
 
@@ -370,11 +389,30 @@ func _process(_delta: float) -> void:
 	hud.status.text = "  ".join(player.statuses.active.keys()).to_upper()
 	if player.barrier > 0: hud.status.text += "  BARRIER %.0f" % player.barrier
 	if player.guard_time > 0: hud.status.text += "  GUARD %.1fs" % player.guard_time
+	var active_status: Array[String] = []
+	for key: String in player.statuses.active.keys():
+		if key in ["burn", "chill", "freeze", "stagger", "airborne", "barrier", "guard", "invulnerable"]:
+			active_status.append(key)
+	if player.barrier > 0.0: active_status.append("barrier")
+	if player.guard_time > 0.0: active_status.append("guard")
+	active_status.sort()
+	var status_signature: String = ",".join(active_status)
+	if status_signature != hud.status_icon_keys:
+		hud.status_icon_keys = status_signature
+		for child: Node in hud.status_icons.get_children():
+			child.queue_free()
+			hud.status_icons.remove_child(child)
+		for key: String in active_status:
+			var status_icon := TextureRect.new()
+			status_icon.texture = load("res://art/sprites/status/%s.png" % key)
+			status_icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			status_icon.custom_minimum_size = Vector2(22, 22)
+			status_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			status_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			status_icon.tooltip_text = key.capitalize()
+			hud.status_icons.add_child(status_icon)
 	hud.cast.text = "CASTING  " + player.casting.display_name if player.casting != null else "READY TO CAST"
 	hud.cast_bar.value = 1.0 - player.cast_remaining / player.cast_total if player.casting != null else 0.0
-	hud.selection.text = player.selected.display_name + "\nLeft-click to confirm.\nRight-click to cancel & move." if player.selected != null else "Select a spell to see its range."
-	hud.tutorial.text = player.hint
-	hud.tutorial_box.visible = not player.tutorial_done
 	var living: int = 0
 	for enemy: EnemyFighter in arena.enemies:
 		if not enemy.health.dead: living += 1
@@ -472,7 +510,7 @@ func show_settings(paused: bool) -> void:
 	get_tree().paused = paused
 	var box: VBoxContainer = make_overlay()
 	UI.label(box, "Combat paused" if paused else "Settings", 29, UI.GOLD)
-	for pair: Array in [["master", "Master volume"], ["music", "Music volume"], ["sfx", "Sound effects"], ["shake", "Screen shake"], ["ui_scale", "Text scale"]]:
+	for pair: Array in [["master", "Master volume"], ["music", "Music volume"], ["sfx", "Sound effects"], ["shake", "Screen shake"], ["ui_scale", "Text scale"], ["fx_quality", "Spell VFX intensity"]]:
 		var row: HBoxContainer = UI.row(box)
 		UI.label(row, pair[1], 17).custom_minimum_size.x = 180
 		var slider: HSlider = HSlider.new()

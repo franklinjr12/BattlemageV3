@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3]
 [ext_resource type="Script" path="res://scripts/data/spell_data.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/spells/area.tscn" id="2"]
-[ext_resource type="Texture2D" path="res://art/combustion.svg" id="3"]
+[ext_resource type="Texture2D" path="res://art/icons/spells/combustion.png" id="3"]
 [resource]
 script = ExtResource("1")
 id = "combustion"

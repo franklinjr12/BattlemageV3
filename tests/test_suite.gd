@@ -171,6 +171,9 @@ func tick(arena: ArenaDirector, duration: float, enemies_active: bool = false) -
 func test_combat() -> void:
 	var arena: ArenaDirector = make_arena()
 	var player: PlayerFighter = arena.player
+	check(ArenaDirector.RADIUS > 1280.0, "Expanded arena is larger than viewport")
+	check(arena.camera != null and arena.camera.get_parent() == player, "Player-following combat camera attached")
+	check(arena.inside(ArenaDirector.CENTER + Vector2(900, 0)), "Expanded arena supports long traversal")
 	var select_event: InputEventKey = InputEventKey.new()
 	select_event.physical_keycode = KEY_Q
 	select_event.pressed = true

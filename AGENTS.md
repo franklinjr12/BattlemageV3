@@ -2,6 +2,10 @@
 
 These instructions apply to the entire repository. Keep changes scoped to the requested work and use the actual Godot project as the source of truth for implemented functionality.
 
+## Implementation status and regeneration
+
+Before claiming the visual refactor is complete, read `docs/VISUAL_REFACTOR_IMPLEMENTATION.md`; it documents what has been integrated and what still does **not** meet the final art targets. The current Aseprite sources can be regenerated through the four `tools/refactor_*_assets.lua` scripts using the IGH Aseprite capability. Regeneration overwrites current generated assets; do not run it after manually editing those sources without reviewing the consequences. Validate with `python tools/validate_visual_assets.py`.
+
 ## Read first
 
 1. `README.md` — current controls, gameplay, engine setup, architecture, and verification commands.

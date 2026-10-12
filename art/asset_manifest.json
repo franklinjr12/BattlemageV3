@@ -1,0 +1,981 @@
+{
+  "schema_version": 1,
+  "description": "Aseprite-authored visual refactor assets; reference image is not a source atlas",
+  "assets": [
+    {
+      "id": "actor_player",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_player.aseprite",
+      "export": "art/sprites/actors/player.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_pyromancer",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_pyromancer.aseprite",
+      "export": "art/sprites/actors/pyromancer.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_cryomancer",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_cryomancer.aseprite",
+      "export": "art/sprites/actors/cryomancer.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_battlemage",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_battlemage.aseprite",
+      "export": "art/sprites/actors/battlemage.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_champion",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_champion.aseprite",
+      "export": "art/sprites/actors/champion.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_golem",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_golem.aseprite",
+      "export": "art/sprites/actors/golem.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_hound",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_hound.aseprite",
+      "export": "art/sprites/actors/hound.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_skitter",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_skitter.aseprite",
+      "export": "art/sprites/actors/skitter.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_spitter",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_spitter.aseprite",
+      "export": "art/sprites/actors/spitter.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "actor_wisp",
+      "category": "actor",
+      "source": "art/source/visual_refactor/actor_wisp.aseprite",
+      "export": "art/sprites/actors/wisp.png",
+      "width": 256,
+      "height": 320,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 20
+    },
+    {
+      "id": "fx_fireball",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_fireball.aseprite",
+      "export": "art/sprites/spells/fireball.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_fireball",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_fireball.aseprite",
+      "export": "art/icons/spells/fireball.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_combustion",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_combustion.aseprite",
+      "export": "art/sprites/spells/combustion.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_combustion",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_combustion.aseprite",
+      "export": "art/icons/spells/combustion.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_burning_ground",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_burning_ground.aseprite",
+      "export": "art/sprites/spells/burning_ground.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_burning_ground",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_burning_ground.aseprite",
+      "export": "art/icons/spells/burning_ground.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_flame_lash",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_flame_lash.aseprite",
+      "export": "art/sprites/spells/flame_lash.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_flame_lash",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_flame_lash.aseprite",
+      "export": "art/icons/spells/flame_lash.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_ice_spike",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_ice_spike.aseprite",
+      "export": "art/sprites/spells/ice_spike.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_ice_spike",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_ice_spike.aseprite",
+      "export": "art/icons/spells/ice_spike.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_frost_nova",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_frost_nova.aseprite",
+      "export": "art/sprites/spells/frost_nova.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_frost_nova",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_frost_nova.aseprite",
+      "export": "art/icons/spells/frost_nova.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_icicle_rain",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_icicle_rain.aseprite",
+      "export": "art/sprites/spells/icicle_rain.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_icicle_rain",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_icicle_rain.aseprite",
+      "export": "art/icons/spells/icicle_rain.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_ice_barrier",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_ice_barrier.aseprite",
+      "export": "art/sprites/spells/ice_barrier.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_ice_barrier",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_ice_barrier.aseprite",
+      "export": "art/icons/spells/ice_barrier.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_earth_pillar",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_earth_pillar.aseprite",
+      "export": "art/sprites/spells/earth_pillar.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_earth_pillar",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_earth_pillar.aseprite",
+      "export": "art/icons/spells/earth_pillar.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_stone_fist",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_stone_fist.aseprite",
+      "export": "art/sprites/spells/stone_fist.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_stone_fist",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_stone_fist.aseprite",
+      "export": "art/icons/spells/stone_fist.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_stone_guard",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_stone_guard.aseprite",
+      "export": "art/sprites/spells/stone_guard.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_stone_guard",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_stone_guard.aseprite",
+      "export": "art/icons/spells/stone_guard.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_tremor",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_tremor.aseprite",
+      "export": "art/sprites/spells/tremor.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_tremor",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_tremor.aseprite",
+      "export": "art/icons/spells/tremor.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_gust",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_gust.aseprite",
+      "export": "art/sprites/spells/gust.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_gust",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_gust.aseprite",
+      "export": "art/icons/spells/gust.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_vortex",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_vortex.aseprite",
+      "export": "art/sprites/spells/vortex.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_vortex",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_vortex.aseprite",
+      "export": "art/icons/spells/vortex.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_wind_blade",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_wind_blade.aseprite",
+      "export": "art/sprites/spells/wind_blade.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_wind_blade",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_wind_blade.aseprite",
+      "export": "art/icons/spells/wind_blade.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_wind_dash",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_wind_dash.aseprite",
+      "export": "art/sprites/spells/wind_dash.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_wind_dash",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_wind_dash.aseprite",
+      "export": "art/icons/spells/wind_dash.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_claw",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_claw.aseprite",
+      "export": "art/sprites/spells/claw.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_claw",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_claw.aseprite",
+      "export": "art/icons/spells/claw.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_pounce",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_pounce.aseprite",
+      "export": "art/sprites/spells/pounce.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_pounce",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_pounce.aseprite",
+      "export": "art/icons/spells/pounce.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_slam",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_slam.aseprite",
+      "export": "art/sprites/spells/slam.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_slam",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_slam.aseprite",
+      "export": "art/icons/spells/slam.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_spit",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_spit.aseprite",
+      "export": "art/sprites/spells/spit.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_spit",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_spit.aseprite",
+      "export": "art/icons/spells/spit.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "fx_hex",
+      "category": "spell",
+      "source": "art/source/visual_refactor/spell_hex.aseprite",
+      "export": "art/sprites/spells/hex.png",
+      "width": 192,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 4
+    },
+    {
+      "id": "icon_spell_hex",
+      "category": "skill_icon",
+      "source": "art/source/visual_refactor/icon_hex.aseprite",
+      "export": "art/icons/spells/hex.png",
+      "width": 48,
+      "height": 48,
+      "frame_size": [
+        48,
+        48
+      ],
+      "frames": 1
+    },
+    {
+      "id": "tile_arena_floor",
+      "category": "environment",
+      "source": "art/source/visual_refactor/arena_floor.aseprite",
+      "export": "art/sprites/tiles/arena_floor.png",
+      "width": 512,
+      "height": 64,
+      "frame_size": [
+        64,
+        64
+      ],
+      "frames": 8
+    },
+    {
+      "id": "prop_column",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_column.aseprite",
+      "export": "art/sprites/props/column.png",
+      "width": 48,
+      "height": 96,
+      "frame_size": [
+        48,
+        96
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_broken_column",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_broken_column.aseprite",
+      "export": "art/sprites/props/broken_column.png",
+      "width": 48,
+      "height": 96,
+      "frame_size": [
+        48,
+        96
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_brazier",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_brazier.aseprite",
+      "export": "art/sprites/props/brazier.png",
+      "width": 48,
+      "height": 72,
+      "frame_size": [
+        48,
+        72
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_crystal",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_crystal.aseprite",
+      "export": "art/sprites/props/crystal.png",
+      "width": 48,
+      "height": 72,
+      "frame_size": [
+        48,
+        72
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_banner_fire",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_banner_fire.aseprite",
+      "export": "art/sprites/props/banner_fire.png",
+      "width": 32,
+      "height": 64,
+      "frame_size": [
+        32,
+        64
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_banner_ice",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_banner_ice.aseprite",
+      "export": "art/sprites/props/banner_ice.png",
+      "width": 32,
+      "height": 64,
+      "frame_size": [
+        32,
+        64
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_banner_earth",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_banner_earth.aseprite",
+      "export": "art/sprites/props/banner_earth.png",
+      "width": 32,
+      "height": 64,
+      "frame_size": [
+        32,
+        64
+      ],
+      "frames": 1
+    },
+    {
+      "id": "prop_banner_air",
+      "category": "environment_prop",
+      "source": "art/source/visual_refactor/prop_banner_air.aseprite",
+      "export": "art/sprites/props/banner_air.png",
+      "width": 32,
+      "height": 64,
+      "frame_size": [
+        32,
+        64
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_button_normal",
+      "category": "ui_button",
+      "source": "art/source/visual_refactor/ui_button_normal.aseprite",
+      "export": "art/sprites/ui/button_normal.png",
+      "width": 96,
+      "height": 40,
+      "frame_size": [
+        96,
+        40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_button_hover",
+      "category": "ui_button",
+      "source": "art/source/visual_refactor/ui_button_hover.aseprite",
+      "export": "art/sprites/ui/button_hover.png",
+      "width": 96,
+      "height": 40,
+      "frame_size": [
+        96,
+        40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_button_pressed",
+      "category": "ui_button",
+      "source": "art/source/visual_refactor/ui_button_pressed.aseprite",
+      "export": "art/sprites/ui/button_pressed.png",
+      "width": 96,
+      "height": 40,
+      "frame_size": [
+        96,
+        40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_button_disabled",
+      "category": "ui_button",
+      "source": "art/source/visual_refactor/ui_button_disabled.aseprite",
+      "export": "art/sprites/ui/button_disabled.png",
+      "width": 96,
+      "height": 40,
+      "frame_size": [
+        96,
+        40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_button_focus",
+      "category": "ui_button",
+      "source": "art/source/visual_refactor/ui_button_focus.aseprite",
+      "export": "art/sprites/ui/button_focus.png",
+      "width": 96,
+      "height": 40,
+      "frame_size": [
+        96,
+        40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "ui_button_selected",
+      "category": "ui_button",
+      "source": "art/source/visual_refactor/ui_button_selected.aseprite",
+      "export": "art/sprites/ui/button_selected.png",
+      "width": 96,
+      "height": 40,
+      "frame_size": [
+        96,
+        40
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_burn",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_burn.aseprite",
+      "export": "art/sprites/status/burn.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_chill",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_chill.aseprite",
+      "export": "art/sprites/status/chill.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_freeze",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_freeze.aseprite",
+      "export": "art/sprites/status/freeze.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_stagger",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_stagger.aseprite",
+      "export": "art/sprites/status/stagger.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_airborne",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_airborne.aseprite",
+      "export": "art/sprites/status/airborne.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_barrier",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_barrier.aseprite",
+      "export": "art/sprites/status/barrier.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_guard",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_guard.aseprite",
+      "export": "art/sprites/status/guard.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    },
+    {
+      "id": "icon_status_invulnerable",
+      "category": "status_icon",
+      "source": "art/source/visual_refactor/status_invulnerable.aseprite",
+      "export": "art/sprites/status/invulnerable.png",
+      "width": 24,
+      "height": 24,
+      "frame_size": [
+        24,
+        24
+      ],
+      "frames": 1
+    }
+  ]
+}

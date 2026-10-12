@@ -1,11 +1,13 @@
 class_name SpellVisual extends Node2D
 
-const FRAME_SIZE := Vector2(32, 32)
+const FRAME_SIZE := Vector2(48, 48)
 const FRAME_COUNT := 4
 
 var sprite := AnimatedSprite2D.new()
 var glow := AnimatedSprite2D.new()
 var particles := GPUParticles2D.new()
+var magic_light := PointLight2D.new()
+static var shared_light_texture: Texture2D
 var element_color := Color.WHITE
 var pulse_radius: float = 14.0
 var age: float = 0.0
@@ -16,6 +18,9 @@ func _ready() -> void:
 	add_child(glow)
 	add_child(sprite)
 	add_child(particles)
+	add_child(magic_light)
+	magic_light.texture = _light_texture()
+	magic_light.enabled = false
 	for item in [sprite, glow]:
 		item.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		item.centered = true
@@ -56,6 +61,11 @@ func configure(definition: SpellData, team: int, world_position: Vector2, rotati
 	sprite.play("active")
 	glow.play("active")
 	_configure_particles(visual_scale, keep_emitting)
+	var quality: float = float(GameState.settings.get("fx_quality", 1.0))
+	magic_light.color = element_color
+	magic_light.energy = (0.22 if persistent else 0.44) * quality
+	magic_light.texture_scale = clampf(visual_scale * 1.5, 0.85, 3.0)
+	magic_light.enabled = quality >= 0.35
 	queue_redraw()
 
 func _process(delta: float) -> void:
@@ -66,12 +76,13 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func _configure_particles(visual_scale: float, keep_emitting: bool) -> void:
-	particles.amount = clampi(int(12.0 * visual_scale), 10, 36)
+	var quality: float = float(GameState.settings.get("fx_quality", 1.0))
+	particles.amount = clampi(int(12.0 * visual_scale * quality), 1, 36)
 	particles.lifetime = 0.55 if not keep_emitting else 0.8
 	particles.one_shot = not keep_emitting
 	particles.explosiveness = 0.72 if not keep_emitting else 0.15
 	particles.randomness = 0.65
-	particles.emitting = true
+	particles.emitting = quality >= 0.1
 	var process := ParticleProcessMaterial.new()
 	process.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
 	process.emission_sphere_radius = maxf(3.0, 7.0 * visual_scale)
@@ -100,3 +111,15 @@ static func _particle_texture() -> Texture2D:
 	image.set_pixel(3, 2, Color(1, 1, 1, 0.7))
 	image.set_pixel(2, 3, Color(1, 1, 1, 0.7))
 	return ImageTexture.create_from_image(image)
+
+static func _light_texture() -> Texture2D:
+	if shared_light_texture != null:
+		return shared_light_texture
+	var image: Image = Image.create(96, 96, false, Image.FORMAT_RGBA8)
+	for y: int in 96:
+		for x: int in 96:
+			var dist: float = Vector2(x - 47.5, y - 47.5).length() / 48.0
+			var alpha: float = pow(maxf(0.0, 1.0 - dist), 1.7)
+			image.set_pixel(x, y, Color(1.0, 1.0, 1.0, alpha))
+	shared_light_texture = ImageTexture.create_from_image(image)
+	return shared_light_texture

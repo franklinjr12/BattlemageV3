@@ -8,6 +8,12 @@ The project's visual direction is documented in [Art Style & Asset Production Gu
 
 Repository-level instructions for autonomous coding/art agents are in [AGENTS.md](AGENTS.md). Existing scripts and Resources remain authoritative for current gameplay.
 
+## Visual refactor implementation
+
+The approved art specification is in [Art Style Guide](docs/Battlemage_Arena_Art_Style_Guide.md), and the reference board is [Reference Spritesheet](docs/Battlemage_Arena_Reference_Spritesheet.png). See [Visual Refactor Implementation Status](docs/VISUAL_REFACTOR_IMPLEMENTATION.md) for currently integrated changes, verification results, and remaining design work.
+
+The Aseprite generation scripts live under `tools/refactor_*_assets.lua`. Run `python tools/validate_visual_assets.py` to validate the current manifest and generated PNGs. Regeneration overwrites the relevant outputs.
+
 ## Play
 
 - Right mouse: move to a destination; also cancels spell selection.

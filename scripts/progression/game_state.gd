@@ -4,7 +4,7 @@ signal saved(ok: bool)
 const SAVE_VERSION: int = 1
 const SAVE_PATH: String = "user://run.json"
 var run: Dictionary = {}
-var settings: Dictionary = {"master": 0.8, "music": 0.35, "sfx": 0.8, "shake": 0.5, "numbers": true, "fullscreen": false, "ui_scale": 1.0}
+var settings: Dictionary = {"master": 0.8, "music": 0.35, "sfx": 0.8, "shake": 0.5, "numbers": true, "fullscreen": false, "ui_scale": 1.0, "fx_quality": 1.0}
 var save_error: String = ""
 var in_combat: bool = false
 var last_result: Dictionary = {}
